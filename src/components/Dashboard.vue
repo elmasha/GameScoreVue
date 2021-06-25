@@ -12,16 +12,17 @@
                         <li v-for="story in stories" v-bind:key="story.id" class="collection-item">
                         <div><img :src="story.image" alt=""></div>
                         {{story.Title}}
+
+                            <router-link class="secondary-content" v-bind:to="{name:'viewstory'}"></router-link>
                         </li>
                     </ul>
 
                 </b-col>
                 
-
                 <b-col cols="8">
                 
                 
-                
+    
                 </b-col>
 
 
