@@ -1,9 +1,69 @@
 <template>
-    <nav>
-        <div class="nav wrapper green">
-            <div class="container">
-                <router-link to="/" class="brand-logo">Gamescores</router-link>
-            </div>
+
+ <div>
+ <nav id="nav-bar-menu">
+   <vs-navbar   class="nabarx">
+      <div slot="title">
+        <vs-navbar-title>
+            <img  :src="logo" width="150px" height="50vh"/>
+        </vs-navbar-title>
+      </div>
+
+      <vs-navbar-item index="0">
+        <router-link to="/" id="nav-item">Home</router-link>
+      </vs-navbar-item>
+      <vs-navbar-item index="1">
+        <router-link to="/" id="nav-item">News</router-link>
+      </vs-navbar-item>
+
+
+      <vs-navbar-item index="2">
+        <div>
+        <router-link id="nav-item"  to="/login">Login</router-link>
         </div>
-    </nav>   
+        
+      </vs-navbar-item>
+
+      <vs-navbar-item index="2">
+        <router-link to="/" id="nav-item">Register</router-link>
+      </vs-navbar-item>
+    </vs-navbar>
+ </nav>
+  
+  </div>
+
+    
+
+    
+      
 </template>
+<script>
+export default {
+    data: () => ({
+        logo: require('@/assets/logo.png') 
+    })
+}
+</script>
+
+<style>
+
+#nav-item{
+    font-weight: 500;
+    font-size: 16px;
+    color: #F19124;
+}
+#nav-item:hover{
+    font-weight: 500;
+    font-size: 16px;
+    color: #08da4e;
+}
+#nav-bar-menu{
+background: #fff;
+position: relative;
+height: 70px;
+}
+.left{
+background: #fff;
+color: #000;
+}
+</style>
