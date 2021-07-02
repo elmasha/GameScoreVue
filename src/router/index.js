@@ -4,6 +4,7 @@ import Dashboard from '@/components/Dashboard.vue'
 import Login from '@/components/Login.vue'
 import AddStory from '@/components/AddStory.vue'
 import ViewStory from '@/components/ViewStory.vue'
+import Register from '@/components/Register.vue'
 
 
 
@@ -28,7 +29,12 @@ const routes = [{
         path: '/:story_id',
         name: 'viewstory',
         component: ViewStory
-    }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register
+    },
 ]
 
 const router = new VueRouter({

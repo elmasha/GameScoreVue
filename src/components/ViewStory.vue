@@ -3,8 +3,8 @@
     <div id="viewstory">
 
                     <div class="col-md-12" align="center">
-                        <div id="header-image" class="container">
-                        <img :src="header2" width="100%" height="150vh"/> </div>    
+                        <div  class="container">
+                        <img id="header-image" :src="header2" /> </div>    
                     </div>
 
         <div class="container col-md-7">
@@ -16,6 +16,7 @@
                 <div class="story-view-image">
                 <img id="imageViewStory" class="fluid" :src="imageUrl" alt="">
                 </div>
+                 <hr>
           <div class="col-md-8 ">
             <div  class="col-md-12 container-fluid container-xl d-flex container">
              
@@ -40,6 +41,7 @@
               
             </div>
           </div>
+          <hr>
          <div class="col-md-12 text-center" id="story-view-story">
          <p>{{story}}</p>
         </div>
@@ -214,7 +216,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #btn{
     margin-top: 10px;
     color: #F19124;
@@ -232,8 +234,8 @@ export default {
     border-radius: 12px;
 }
 #imageViewStory{
-    width: 90%;
-    height: 70vh;
+    width: 100%;
+    height: 50vh;
 }
 #viewstory{
 padding: 30px;

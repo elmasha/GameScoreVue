@@ -24,8 +24,11 @@
         
       </vs-navbar-item>
 
-      <vs-navbar-item index="2">
-        <router-link to="/" id="nav-item">Register</router-link>
+      <vs-navbar-item index="3">
+      <div>
+        <router-link  id="nav-item" to="/register">Register</router-link>
+      </div>
+      
       </vs-navbar-item>
     </vs-navbar>
  </nav>

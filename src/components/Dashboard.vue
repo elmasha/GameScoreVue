@@ -1,5 +1,5 @@
 <template >
-    <div id="dashboard">
+    <div id="dashboard" >
                     <div class="col-md-12" align="center">
                         <div id="header-image" class="container">
                         <img :src="header" width="100%" height="150vh"/> </div>    
@@ -34,11 +34,13 @@
                          
 
                             <!--Fecth Div-->
-                            <div id="fetch">
+                           
+
+                            <div id="fetch" v-vue-aos="{animationClass:'fadeIn animated'}">
                             
                                <ul id="StoryAll" class="with-header" >
                                 <li v-for="story in stories" v-bind:key="story.id" class="collection-item">
-                                <div id="story-child">
+                                <div id="story-child"  >
                                     <router-link id="readMore"  v-bind:to="{name:'viewstory',
                                      params:{story_id: story.id}}">
 
@@ -47,7 +49,10 @@
                                         <b-img class="story-image col-md-12" :src="story.image" alt=""/>
                                     </div>
 
-                                      
+                                            <div class="col-md-4">
+                                                    <p id="cats">{{story.Category}}
+                                                    </p>
+                                            </div>
                     
                                    </div>
 
@@ -55,21 +60,32 @@
                                  <div id="story-head"  class="story-title text-center">
                                     
                                      <div class="col-md-12 container-fluid container-xl d-flex container">
-                                            <div>
-                                                <span  id="showUS"  class="iconify" data-icon="ant-design:like-filled" 
-                                                data-inline="false" data-width="24" data-height="24">
-                                                {{story.Like}}
-                                                </span>
-                                                <span id="commentSect" >{{story.Like}}</span>
-                                            </div>
+                                                <div >
+                                                    <span  id="showUS"  class="iconify" data-icon="ant-design:like-filled" 
+                                                    data-inline="false" data-width="24" data-height="24">
+                                                    {{story.Like}}
+                                                    </span>
+                                                    <span id="commentSect" >{{story.Like}}</span>
+                                                </div>
                                             
-                                            <div>
+                                            <div >
                                                 <span id="showUS"  class="iconify" data-icon="ri:chat-3-fill" 
                                                 data-inline="false" data-width="24" data-height="24">
                                                 {{story.Comment}}
                                                 </span>
                                                 <span  >{{story.Comment}}</span>
                                             </div>
+                                    <div id="showUS" class="col-md-3">
+                                    
+                                            <router-link id="readMore"  v-bind:to="{name:'viewstory',
+                                            params:{story_id: story.id}}">
+                                            <div>
+                                                <span>Read more</span> 
+                                        
+                                            </div> 
+                                            </router-link>
+                                    </div> 
+                                                
                                 
                                       </div>     
                                        
@@ -77,24 +93,7 @@
                                     <h3 id="titleStory">{{story.Title}}
                                     </h3>
                                     
-                                    <div class="col-md-12 container-fluid container-xl d-flex container">
-                                    <div class="col-md-3">
-                                        <p  id="cats">{{story.Category}}
-                                        </p>
-                                      </div>
-                                     <router-link id="readMore"  v-bind:to="{name:'viewstory',
-                                       params:{story_id: story.id}}">
-                                       <div>
-                                        <span>Read more</span> 
-                                            <span class="iconify" data-icon="fluent:more-horizontal-28-filled" data-inline="false" data-width="20" data-height="20">
-                                            </span>
-
-                                       </div> 
-                                     </router-link>
-                                    
-                                      
-
-                                    </div> 
+                                
                                     
                                  </div> 
                                 </div>
@@ -336,6 +335,7 @@ export default {
 }
 #hoverImage:hover{
     background: #F19124;
+    border-radius: 8px;
 }
 #categoryID{
    font-weight: 600;
@@ -360,14 +360,18 @@ font-weight: 400;
 #cats{
 margin-bottom: 20px;
 font-size: 18px;
-color: #F19124;
+color: #fff;
+background: #F19124;
+border-radius: 8px;
 text-align: center;
 font-weight: 500;
 }
 #cats:hover{
 margin-bottom: 20px;
 font-size: 18px;
-color: #168E2A;
+color: #fff;
+border-radius: 8px;
+background: #168E2A;
 font-weight: 500;
 }
 
@@ -376,7 +380,7 @@ font-weight: 500;
 
 .story-image{
 width: 50%;
-max-width: 100%;
+max-width: 90%;
 min-width: 100%;
 height: 50vh;
 margin-bottom: 10px;
