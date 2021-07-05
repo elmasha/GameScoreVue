@@ -14,7 +14,7 @@
                             
                             <div v-scrollbar style="width: 300px;">
                             
-                                <div id="nav-category" align="left" class="container-fluid container-xl d-flex container col-md-12  text-center">
+                                <div id="nav-category" class="container-fluid container-xl d-flex container col-md-12  text-center">
                                 
                                     <span id="mynav" @click="SearchCat('Football')">Football</span>
                                     <span id="mynav" @click="SearchCat('Football')">Boxing</span>
@@ -24,6 +24,9 @@
                                 
                                 
                                 </div>
+
+
+                                
 
                             </div>
                             
@@ -40,6 +43,7 @@
                             
                                <ul id="StoryAll" class="with-header" >
                                 <li v-for="story in stories" v-bind:key="story.id" class="collection-item">
+                                
                                 <div id="story-child"  >
                                     <router-link id="readMore"  v-bind:to="{name:'viewstory',
                                      params:{story_id: story.id}}">
@@ -89,65 +93,18 @@
                                 
                                       </div>     
                                        
-                                    
-                                    <h3 id="titleStory">{{story.Title}}
-                                    </h3>
-                                    
-                                
-                                    
+                                    <h5 id="titleStory" style="height:500px;">{{story.Title}}
+                                    </h5>
+
+
                                  </div> 
                                 </div>
                                 </li>
-                            </ul>
+                               </ul>
                             
                             </div>
 
-                             <!--Search Div
-                            // <div id="search">
-                            //     <h2>Search</h2>
-                            //     <ul id="Storysearch" class="with-header" >
-                            //     <li v-for="story in stories" v-bind:key="story.id" class="collection-item">
-                            //     <div id="story-child">
-                            //         <router-link id="readMore"  v-bind:to="{name:'viewstory',
-                            //          params:{story_id: story.id}}">
-
-                            //        <div id="hoverImage">
-                            //        <b-img class="story-image col-md-12" :src="story.image" alt=""/>
-                            //        </div>
-                            //        </router-link>
-                            //      <div id="story-head"  class="story-title text-center">
-                            //         <h3 id="titleStory">{{story.Title}}
-                            //         </h3>
-                            //         <p id="categoryID">{{story.Category}}
-                            //         </p>
-                            //         <div>
-                                    
-                            //         </div>
-                                    
-                            //       <router-link id="readMore"  v-bind:to="{name:'viewstory',
-                            //          params:{story_id: story.id}}">
-                            //            <div>
-                            //            <span>Read more</span> 
-                            //             <span class="iconify" data-icon="fluent:more-horizontal-28-filled" data-inline="false" data-width="40" data-height="40">
-                            //             </span>
-
-                            //            </div> 
-                            //          </router-link>
-                                  </div>
-                                  
-                                    
-
-                        
-                                  
-                            //     </div>
-                            //     </li>
-                            // </ul>
-
-                            // </div>
-
-                            -->
-                         
-
+                            
                             
 
                     </b-col>
@@ -300,9 +257,9 @@ export default {
 }
 #mynav{
     color: #F19124;
-    margin: 17px;
     font-weight: 600;
     font-size: 16px;
+    margin: 6px;
 }
 #mynav:hover{
     
@@ -315,12 +272,13 @@ export default {
     
 }
 #story-child{
-    margin: 20px;
+    margin: 8px;
+    height: 90vh;
 }
 #story-head{
     text-align: center;
     height: 20vh;
-    margin-top:auto ;
+    
 }
 #myStory{
    width: 90%;
@@ -332,6 +290,8 @@ export default {
    font-size: 24px;
    color: rgb(61, 59, 59);
    text-align: center;
+   height: 500px;
+   max-width: 500px;
 }
 #hoverImage:hover{
     background: #F19124;
@@ -344,15 +304,13 @@ export default {
    color: #168E2A; 
 }
 #readMore{
-margin-bottom: 20px;
-font-size: 18px;
+font-size: 12px;
 color: #F19124;
 text-align: center;
 font-weight: 400;
 }
 #readMore:hover{
-margin-bottom: 20px;
-font-size: 18px;
+font-size: 13px;
 color: #168E2A;
 font-weight: 400;
 }
@@ -382,7 +340,7 @@ font-weight: 500;
 width: 50%;
 max-width: 90%;
 min-width: 100%;
-height: 50vh;
+height: 40vh;
 margin-bottom: 10px;
 
 }

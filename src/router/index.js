@@ -22,7 +22,7 @@ const routes = [{
     },
     {
         path: '/addStory',
-        name: 'addstroy',
+        name: 'addstory',
         component: AddStory
     },
     {
@@ -31,10 +31,10 @@ const routes = [{
         component: ViewStory
     },
     {
-        path: '/register',
+        path: '/Register',
         name: 'register',
         component: Register
-    },
+    }
 ]
 
 const router = new VueRouter({

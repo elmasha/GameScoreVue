@@ -5,6 +5,8 @@ import { BootstrapVue, IconsPlugin, BNavbar } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import Vuesax from 'vuesax'
 import * as VueAos from 'vue-aos'
+import moment from 'moment'
+
 
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -16,6 +18,9 @@ import ScrollBar from '@morioh/v-perfect-scrollbar'
 
 //------Vue animate aos ----
 Vue.use(VueAos);
+
+
+Vue.use(moment);
 
 // global register
 Vue.use(ScrollBar);

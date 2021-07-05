@@ -31,7 +31,7 @@
     </div>
 </template>
 
-<script>
+<script scoped>
 import firebase from 'firebase'
 
 export default {
@@ -50,7 +50,7 @@ export default {
       firebase.auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(data => { 
-          this.$router.replace({ name: 'addStory' });
+          this.$router.replace({ name: 'addstory' });
             console.log( "User",  data.user.uid)
 
         })
