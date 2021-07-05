@@ -127,12 +127,16 @@
                     href="#"
                     class="flex-column align-items-start"
                     v-for="story in stories" v-bind:key="story.id">
-
+                    
+                       <router-link id="readMore"  v-bind:to="{name:'viewstory',
+                                     params:{story_id: story.id}}">
 
                     <div class="d-flex w-100 justify-content-between">
                       <h5 class="mb-1" style="width:500px;">{{ story.Title }}</h5>
                       <small> </small>
                     </div>
+
+                       </router-link>
 
                     <p class="mb-1">
                      <!-- {{ story.Story }} -->

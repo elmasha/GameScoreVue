@@ -11,6 +11,13 @@
                         <!--News-->   
                         <h4 class="text-center">News</h4>
                             <br>
+
+
+                            <div class="col-md-5">
+
+                             <v-select label="Category" :options="options"></v-select>
+                            
+                            </div>
                             
                             <div v-scrollbar style="width: 300px;">
                             
@@ -25,16 +32,8 @@
                                 
                                 </div>
 
-
-                                
-
                             </div>
                             
-
-                
-                        
-
-                         
 
                             <!--Fecth Div-->
                            
@@ -63,8 +62,10 @@
                                    </router-link>
                                  <div id="story-head"  class="story-title text-center">
                                     
-                                     <div class="col-md-12 container-fluid container-xl d-flex container">
-                                                <div >
+                                     <div>
+
+                                     <div   class="col-md-12 container-fluid container-xl d-flex container">
+                                          <div >
                                                     <span  id="showUS"  class="iconify" data-icon="ant-design:like-filled" 
                                                     data-inline="false" data-width="24" data-height="24">
                                                     {{story.Like}}
@@ -79,22 +80,32 @@
                                                 </span>
                                                 <span  >{{story.Comment}}</span>
                                             </div>
-                                    <div id="showUS" class="col-md-3">
+                                     
+                                     
+                                     
+                                     </div>
+                                              
+                                    <div >
                                     
-                                            <router-link id="readMore"  v-bind:to="{name:'viewstory',
+                                            <router-link   v-bind:to="{name:'viewstory',
                                             params:{story_id: story.id}}">
-                                            <div>
-                                                <span>Read more</span> 
+                                            <div id="showUS" class="col-md-3">
+                                                <span id="readMore">Read more</span> 
                                         
                                             </div> 
+
+                                            <div >
+                                    <h5 id="titleStory" style="height:500px;">{{story.Title}}
+                                    </h5>
+                                            </div>
+                                   
                                             </router-link>
                                     </div> 
                                                 
                                 
                                       </div>     
                                        
-                                    <h5 id="titleStory" style="height:500px;">{{story.Title}}
-                                    </h5>
+                                    
 
 
                                  </div> 
@@ -103,13 +114,9 @@
                                </ul>
                             
                             </div>
-
-                            
-                            
-
+                   
                     </b-col>
                 
-
                     <!--Predictions-->
                     <b-col md="4">
             
@@ -165,12 +172,36 @@ export default {
              header: require('@/assets/img/header.jpg'),
             stories:[],
             category:'',
+             options: [
+      'Football',
+      'Boxing',
+      'Rugby',
+      'Hockey',
+      'Tennis'],
+      
              select2:[]
             
            
         }
     },created(){
         this.FetchData
+         
+    },computed(){
+        db.collection("Stories").where("category", "==", this.category)
+                        .get()
+                            .then(queryResult =>{
+                                queryResult.forEach(doc =>{
+                                    console.log(doc.data())
+                                    const data ={
+                                'id': doc.id,
+                                'Title':doc.data().title,
+                                'Story':doc.data().story,
+                                'image': doc.data().image
+                            }
+                            this.stories.push(data)
+                        })
+
+                    })
     },mounted(){
             
             db.collection("Stories").get()
@@ -304,7 +335,7 @@ export default {
    color: #168E2A; 
 }
 #readMore{
-font-size: 12px;
+font-size: 13px;
 color: #F19124;
 text-align: center;
 font-weight: 400;
