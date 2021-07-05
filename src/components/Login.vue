@@ -52,7 +52,7 @@ export default {
         .then(data => { 
           this.$router.replace({ name: 'addstory' });
             console.log( "User",  data.user.uid)
-
+                
         })
         .catch(err => {
           this.error = err.message;
