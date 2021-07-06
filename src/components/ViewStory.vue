@@ -19,9 +19,9 @@
                     </b-row>
             </b-container> -->
 
-    <div class="container col-md-12">
+    <div class="col-md-12">
       <h3 id="story-view-title">{{ title }}</h3>
-      <div class="story-view-image col-md-12">
+      <div class="story-view-image  col-md-9" align="center"> 
         <img id="imageViewStory" class="fluid" :src="imageUrl" alt="" />
       </div>
       <div id="time">
@@ -69,7 +69,18 @@
                   data-width="30"
                   data-height="30"
                 ></span>
+
               </div>
+
+              
+                      <div id="socialmedia"  class="col-md-12 container-fluid container-xl d-flex container">
+                        <a href=""><i id="shares" class="ri-facebook-circle-fill btn-floating btn-small indigo"></i></a>
+                        <i id="shares" class="ri-twitter-line btn-floating btn-small blue"></i>
+                        <i id="shares" class="ri-instagram-line btn-floating btn-small red"></i>
+                        
+
+                      
+                      </div>
               <hr />
 
               <div class="col-md-12" id="story-view-story">
@@ -98,15 +109,8 @@
                 </div>
                   
                   <div>
-                    <button id="btn" type="submit">
-                      <span
-                        class="iconify"
-                        data-icon="fluent:send-20-filled"
-                        data-inline="false"
-                        data-width="28"
-                        data-height="28"
-                      >
-                      </span>
+                    <button  type="submit" class="btn-floating btn-mini orange">
+                     <i class="ri-send-plane-2-fill"></i>
                     </button>
                   </div>
                 </form>
@@ -343,6 +347,10 @@ export default {
 </script>
 
 <style scoped>
+
+#shares{
+  margin: 10px;
+}
 #col2 {
   margin-top: 100px;
   margin-right: 200px;

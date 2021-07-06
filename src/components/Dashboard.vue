@@ -5,66 +5,70 @@
                         <img :src="header" width="100%" height="150vh"/> </div>    
                     </div>
         <b-container id="newsSection" class="bv-example-row">
-            <b-row>
+            
+            <b-row >
                    
-                    <b-col  md="7" cols="12" >
+                    <b-col  md="8" cols="12" >
                         <!--News-->   
                         <h4 class="text-center">News</h4>
                             <br>
 
 
-                            <div class="col-md-5">
+                            <div  align="center" class="col-md-12  container-fluid container-xl d-flex container col-md-12">
 
-                             <v-select label="Category" :options="options"></v-select>
-                            
+                             <v-select v-model="cats"    placeholder="Search..." class="style-chooser"  :options="options"></v-select>
+                             <button style="margin:10px;"  @click="SearchCat(cats)"
+                              class="btn-floating btn-small orange"><i class="ri-search-line"></i>Search</button>
+
+
+                               
+                              
                             </div>
                             
-                            <div v-scrollbar style="width: 300px;">
-                            
-                                <div id="nav-category" class="container-fluid container-xl d-flex container col-md-12  text-center">
-                                
-                                    <span id="mynav" @click="SearchCat('Football')">Football</span>
-                                    <span id="mynav" @click="SearchCat('Football')">Boxing</span>
-                                    <span id="mynav" @click="SearchCat('Football')">Rugby</span>
-                                    <span id="mynav" @click="SearchCat('Football')">Hockey</span>
-                                <span id="mynav" @click="SearchCat('Football')">Tennis</span>
-                                
-                                
-                                </div>
-
-                            </div>
-                            
-
+                           
                             <!--Fecth Div-->
                            
 
-                            <div id="fetch" v-vue-aos="{animationClass:'fadeIn animated'}">
+                            <div id="fetch" >
                             
-                               <ul id="StoryAll" class="with-header" >
-                                <li v-for="story in stories" v-bind:key="story.id" class="collection-item">
+                               <div id="StoryAll" class="with-header" >
+                                <div   
+                                v-for="(story, id) in stories" v-bind:key="id" class="collection-item">
+                                 
+                                 
                                 
-                                <div id="story-child"  >
-                                    <router-link id="readMore"  v-bind:to="{name:'viewstory',
+                                <div >
+                                    <router-link   v-bind:to="{name:'viewstory',
                                      params:{story_id: story.id}}">
 
-                                   <div id="hoverImage">
-                                    <div>
-                                        <b-img class="story-image col-md-12" :src="story.image" alt=""/>
-                                    </div>
+                                    
+                                        <router-link v-bind:to="{name:'viewstory',
+                                        params:{story_id: story.id}}">
+                                        
+                                        <h5 id="titleStory" style="height:140px;">{{story.Title}}
+                                                    </h5>
+                                        </router-link>
+                                         
+                                  
+                                    <div id="hoverImage" class="col-md-9" >
 
-                                            <div class="col-md-4">
+                                    <b-img class="story-image" :src="story.image" alt=""/>
+                                    
+                                     <div class="col-md-4">
                                                     <p id="cats">{{story.Category}}
                                                     </p>
-                                            </div>
-                    
-                                   </div>
+                                    </div>
+
+
+                                    </div>
 
                                    </router-link>
+                                   
                                  <div id="story-head"  class="story-title text-center">
                                     
-                                     <div>
+                                    
 
-                                     <div   class="col-md-12 container-fluid container-xl d-flex container">
+                                     <div class="col-md-9 container-fluid container-xl d-flex container">
                                           <div >
                                                     <span  id="showUS"  class="iconify" data-icon="ant-design:like-filled" 
                                                     data-inline="false" data-width="24" data-height="24">
@@ -80,52 +84,38 @@
                                                 </span>
                                                 <span  >{{story.Comment}}</span>
                                             </div>
-                                     
-                                     
-                                     
+                                
                                      </div>
                                               
-                                    <div >
-                                    
-                                            <router-link   v-bind:to="{name:'viewstory',
-                                            params:{story_id: story.id}}">
-                                            <div id="showUS" class="col-md-3">
-                                                <span id="readMore">Read more</span> 
-                                        
-                                            </div> 
-
-                                            <div >
-                                    <h5 id="titleStory" style="height:500px;">{{story.Title}}
-                                    </h5>
-                                            </div>
-                                   
-                                            </router-link>
-                                    </div> 
-                                                
                                 
-                                      </div>     
+                                     
                                        
                                     
 
 
                                  </div> 
                                 </div>
-                                </li>
-                               </ul>
+                                </div>
+                               </div>
                             
                             </div>
+
+
+
+
                    
                     </b-col>
                 
+
                     <!--Predictions-->
-                    <b-col md="4">
+                    <b-col md="4" >
             
+                        
                     <h4 class="text-center">Predictions</h4>
 
                         <div class="col-md-12">
                         
                         <div class="sidebar">
-                            <br><br>
                         <h4 class="sidebar-title">Leagues</h4>
                         <b-card id="prediction" class="sidebar-item tags">
                             <ul>
@@ -156,9 +146,18 @@
         
         
         <div class="fixed-action-btn">
-            <router-link to="/AddStory" class="btn-floating btn-large red">
-                <i class="fa fa-plus"></i>
+            <router-link to="/AddStory" class="btn-floating btn-small orange">
+                <i class="ri-add-circle-line"></i>
             </router-link>
+
+
+            <a href="" class="btn-floating btn-large orange">
+                <i class="ri-refresh-line"></i>
+            
+            </a>
+            
+
+            
         </div>
     </div>
 </template>
@@ -171,14 +170,9 @@ export default {
         return {
              header: require('@/assets/img/header.jpg'),
             stories:[],
-            category:'',
-             options: [
-      'Football',
-      'Boxing',
-      'Rugby',
-      'Hockey',
-      'Tennis'],
-      
+            category:'Football',
+            cats:null,
+             options: ['Football','Boxing','Rugby','Hockey','Tennis'],
              select2:[]
             
            
@@ -187,21 +181,9 @@ export default {
         this.FetchData
          
     },computed(){
-        db.collection("Stories").where("category", "==", this.category)
-                        .get()
-                            .then(queryResult =>{
-                                queryResult.forEach(doc =>{
-                                    console.log(doc.data())
-                                    const data ={
-                                'id': doc.id,
-                                'Title':doc.data().title,
-                                'Story':doc.data().story,
-                                'image': doc.data().image
-                            }
-                            this.stories.push(data)
-                        })
 
-                    })
+        this.FetchData
+      
     },mounted(){
             
             db.collection("Stories").get()
@@ -221,19 +203,11 @@ export default {
                 })
 
             })
-
          
     },methods:{
-        SearchCat(cat){
-                var x = document.getElementById("fecth");
-                 var y = document.getElementById("search");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else if(y.style.display =="none"){
-                x.style.display = "none";
-                y.style.display = "block";
-                
-                db.collection("Stories").where("category", "==", cat)
+        SearchCat(){
+                this.stories.splice(this.stories);
+                db.collection("Stories").where("category", "==", this.cats)
                   .get()
                     .then(queryResult =>{
                         queryResult.forEach(doc =>{
@@ -242,17 +216,21 @@ export default {
                         'id': doc.id,
                         'Title':doc.data().title,
                         'Story':doc.data().story,
-                        'image': doc.data().image
+                        'Category':doc.data().category,
+                        'image': doc.data().image, 
+                        'Comment' :doc.data().comment,
+                        'Like':doc.data().like
                     }
                     this.stories.push(data)
                 })
 
             })
-            }
+            
                
         },FetchData(){
 
-             db.collection("Stories").get()
+
+            db.collection("Stories").get()
                     .then(queryResult =>{
                         queryResult.forEach(doc =>{
                             console.log(doc.data())
@@ -269,6 +247,10 @@ export default {
                 })
 
             })
+
+
+                
+          
         }
 
     }
@@ -276,7 +258,12 @@ export default {
 </script>
 
 <style>
-
+#btnSearch{
+ background: transparent;
+ border: #F19124 4px solid;
+ padding: 8px;
+ border-radius: 4px;   
+}
 #header-image{
     max-width: 100%;
     min-width: 100%;
@@ -304,11 +291,12 @@ export default {
 }
 #story-child{
     margin: 8px;
-    height: 90vh;
+    height: 70vh;
+    max-height: 70vh;
+    margin: 10px;
 }
 #story-head{
     text-align: center;
-    height: 20vh;
     
 }
 #myStory{
@@ -321,8 +309,10 @@ export default {
    font-size: 24px;
    color: rgb(61, 59, 59);
    text-align: center;
-   height: 500px;
+   height: 90px;
    max-width: 500px;
+   margin-top: 100px;
+   text-overflow: ellipsis;
 }
 #hoverImage:hover{
     background: #F19124;
