@@ -21,7 +21,7 @@
 
     <div class="col-md-12">
       <h3 id="story-view-title">{{ title }}</h3>
-      <div class="story-view-image  col-md-9" align="center"> 
+      <div class="story-view-image col-md-9" align="center">
         <img id="imageViewStory" class="fluid" :src="imageUrl" alt="" />
       </div>
       <div id="time">
@@ -69,24 +69,23 @@
                   data-width="30"
                   data-height="30"
                 ></span>
-
               </div>
 
-              
-                      <div id="socialmedia"  class="col-md-12 container-fluid container-xl d-flex container">
-                        <i id="shares" @click.prevent="ShareBtn" class="shares ri-facebook-circle-fill btn-floating btn-small indigo"></i>
-                        <i id="shares" class="ri-twitter-line btn-floating btn-small blue"></i>
-                        <i id="shares" class="ri-instagram-line btn-floating btn-small red"></i>
-                        
+              <div
+                id="socialmedia"
+                class="col-md-12 container-fluid container-xl d-flex container"
+              >
+                <i
+                  id="shares"
+                  @click.prevent="ShareBtn"
+                  class="shares ri-facebook-circle-fill btn-floating btn-small indigo"
+                ></i>
+                <i id="shares" class="ri-twitter-line btn-floating btn-small blue"></i>
+                <i id="shares" class="ri-instagram-line btn-floating btn-small red"></i>
+
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <div class="addthis_inline_share_toolbox"></div>
-            
-
-
-   
-
-                      
-                      </div>
+              </div>
               <hr />
 
               <div class="col-md-12" id="story-view-story">
@@ -94,14 +93,7 @@
               </div>
 
               <div>
-        
-                <b-embed
-                  type="iframe"
-                  aspect="250by150"
-                  :src="otherLinks"
-                  
-                ></b-embed>
-                
+                <b-embed type="iframe" aspect="250by150" :src="otherLinks"></b-embed>
               </div>
 
               <div class="container-fluid container-xl d-flex container col-md-12">
@@ -109,14 +101,14 @@
                   @submit.prevent="Writecomment(story_id)"
                   class="container-fluid container-xl d-flex container col-md-12"
                 >
-                <div  class="col-md-12">
-                <b-form-input v-model="comments" placeholder="Comment...">
-                  </b-form-input>
-                </div>
-                  
+                  <div class="col-md-12">
+                    <b-form-input v-model="comments" placeholder="Comment...">
+                    </b-form-input>
+                  </div>
+
                   <div>
-                    <button  type="submit" class="btn-floating btn-mini orange">
-                     <i class="ri-send-plane-2-fill"></i>
+                    <button type="submit" class="btn-floating btn-mini orange">
+                      <i class="ri-send-plane-2-fill"></i>
                     </button>
                   </div>
                 </form>
@@ -127,36 +119,37 @@
           <!---Col No.2-->
           <b-col md="4">
             <div id="col2" class="container col-md-12">
-              <b-card title="Trending" align="right" tag="article" style="max-width: 50rem" class="mb-8">
-               
-
+              <b-card
+                title="Trending"
+                align="right"
+                tag="article"
+                style="max-width: 50rem"
+                class="mb-8"
+              >
                 <!-- list group -->
                 <b-list-group>
                   <!-- list item-->
                   <b-list-group-item
                     href="#"
                     class="flex-column align-items-start"
-                    v-for="story in stories" v-bind:key="story.id">
-                    
-                       <router-link id="readMore"  v-bind:to="{name:'viewstory',
-                                     params:{story_id: story.id}}">
-
-                    <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1" style="width:500px;">{{ story.Title }}</h5>
-                      <small> </small>
-                    </div>
-
-                       </router-link>
+                    v-for="story in stories"
+                    v-bind:key="story.id"
+                  >
+                    <router-link
+                      id="readMore"
+                      v-bind:to="{ name: 'viewstory', params: { story_id: story.id } }"
+                    >
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1" style="width: 500px">{{ story.Title }}</h5>
+                        <small> </small>
+                      </div>
+                    </router-link>
 
                     <p class="mb-1">
-                     <!-- {{ story.Story }} -->
+                      <!-- {{ story.Story }} -->
                     </p>
                   </b-list-group-item>
-
-
                 </b-list-group>
-
-
               </b-card>
             </div>
           </b-col>
@@ -169,7 +162,6 @@
 <script>
 import db from "./firebaseInit";
 import moment from "moment";
-
 
 export default {
   name: "viewstory",
@@ -197,8 +189,6 @@ export default {
     timestamp: function () {
       return moment(this.time).format("YYYY-MM-DD [at] hh:mm");
     },
-
-  
   },
 
   beforeRouteEnter(to, from, next) {
@@ -237,8 +227,6 @@ export default {
           this.stories.push(data);
         });
       });
-
-
   },
   filters: {
     moment: function (time) {
@@ -262,8 +250,10 @@ export default {
       }
     },
     FetchData() {
-      var today = new Date;  
-      db.collection("Stories").orderBy('timestamp').startAfter(today)
+      var today = new Date();
+      db.collection("Stories")
+        .orderBy("timestamp")
+        .startAfter(today)
         .get()
         .then((queryResult) => {
           queryResult.forEach((doc) => {
@@ -354,24 +344,20 @@ export default {
           .catch((error) => console.error(error));
       }
     },
-    ShareBtn(){
+    ShareBtn() {
       let doc = encodeURI(document.location.href);
 
-      var shareFacebook = document.querySelector('.shares');
+      var shareFacebook = document.querySelector(".shares");
 
-      shareFacebook.setAttribute("href",`https://www.facebook.com/sharer.php?u=${doc}`);
-      console.log(shareFacebook)
-  
-
-
-    }
+      shareFacebook.setAttribute("href", `https://www.facebook.com/sharer.php?u=${doc}`);
+      console.log(shareFacebook);
+    },
   },
 };
 </script>
 
 <style scoped>
-
-#shares{
+#shares {
   margin: 10px;
 }
 #col2 {
@@ -396,9 +382,8 @@ export default {
 }
 #imageViewStory {
   width: 80%;
-  height: 70vh;
-  min-width: 100%;
-  max-height: 100vh;
+  height: 40vh;
+  max-height: 40vh;
 }
 #viewstory {
   color: #808080;
