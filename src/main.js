@@ -20,6 +20,7 @@ import ScrollBar from '@morioh/v-perfect-scrollbar'
 Vue.use(VueAos);
 
 
+
 Vue.use(moment);
 
 // global register

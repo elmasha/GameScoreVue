@@ -74,10 +74,16 @@
 
               
                       <div id="socialmedia"  class="col-md-12 container-fluid container-xl d-flex container">
-                        <a href=""><i id="shares" class="ri-facebook-circle-fill btn-floating btn-small indigo"></i></a>
+                        <i id="shares" @click.prevent="ShareBtn" class="shares ri-facebook-circle-fill btn-floating btn-small indigo"></i>
                         <i id="shares" class="ri-twitter-line btn-floating btn-small blue"></i>
                         <i id="shares" class="ri-instagram-line btn-floating btn-small red"></i>
                         
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_inline_share_toolbox"></div>
+            
+
+
+   
 
                       
                       </div>
@@ -164,6 +170,7 @@
 import db from "./firebaseInit";
 import moment from "moment";
 
+
 export default {
   name: "viewstory",
   data() {
@@ -184,11 +191,14 @@ export default {
   created() {
     this.fetchData;
     this.FetchData;
+    this.ShareBtn;
   },
   computed: {
     timestamp: function () {
       return moment(this.time).format("YYYY-MM-DD [at] hh:mm");
     },
+
+  
   },
 
   beforeRouteEnter(to, from, next) {
@@ -227,6 +237,8 @@ export default {
           this.stories.push(data);
         });
       });
+
+
   },
   filters: {
     moment: function (time) {
@@ -342,6 +354,17 @@ export default {
           .catch((error) => console.error(error));
       }
     },
+    ShareBtn(){
+      let doc = encodeURI(document.location.href);
+
+      var shareFacebook = document.querySelector('.shares');
+
+      shareFacebook.setAttribute("href",`https://www.facebook.com/sharer.php?u=${doc}`);
+      console.log(shareFacebook)
+  
+
+
+    }
   },
 };
 </script>
