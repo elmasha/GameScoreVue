@@ -2,7 +2,7 @@
   <div id="viewstory">
     <div class="col-md-12" align="center">
       <div class="container">
-        <img id="header-image" :src="header2" />
+        <img id="header-image" :src="header2" style="width: 100%" />
       </div>
     </div>
 
@@ -31,34 +31,19 @@
       <b-container class="row">
         <b-row>
           <!---Col No.1-->
-          <b-col md="8">
+          <b-col md="7">
             <div class="col-md-12">
-              <div class="col-md-12 container-fluid container-xl d-flex container">
-                <div v-on: @click="LikeCount()">
-                  <span
-                    id="showUS"
-                    class="iconify"
-                    data-icon="ant-design:like-filled"
-                    data-inline="false"
-                    data-width="28"
-                    data-height="28"
+              <div class="col-md-12 container-fluid d-flex">
+                <div id="commentSect" v-on: @click="LikeCount()">
+                  <span>
+                    <i id="showUS" class="ri-thumb-up-fill"> {{ like }} </i></span
                   >
-                    {{ like }}
-                  </span>
-                  <span id="commentSect">{{ like }}</span>
                 </div>
 
-                <div>
-                  <span
-                    id="showUS"
-                    class="iconify"
-                    data-icon="ri:chat-3-fill"
-                    data-inline="false"
-                    data-width="28"
-                    data-height="28"
+                <div id="commentSect">
+                  <span>
+                    <i id="showUS" class="ri-chat-3-fill"> {{ comment }} </i></span
                   >
-                  </span>
-                  <span>{{ comment }}</span>
                 </div>
 
                 <span
@@ -71,10 +56,7 @@
                 ></span>
               </div>
 
-              <div
-                id="socialmedia"
-                class="col-md-12 container-fluid container-xl d-flex container"
-              >
+              <div id="socialmedia" class="col-md-12 container-fluid d-flex">
                 <i
                   id="shares"
                   @click.prevent="ShareBtn"
@@ -93,7 +75,12 @@
               </div>
 
               <div>
-                <b-embed type="iframe" aspect="250by150" :src="otherLinks"></b-embed>
+                <b-embed
+                  id="embedSource"
+                  type="iframe"
+                  aspect="250by150"
+                  :src="otherLinks"
+                ></b-embed>
               </div>
 
               <div class="container-fluid container-xl d-flex container col-md-12">
@@ -117,14 +104,14 @@
           </b-col>
 
           <!---Col No.2-->
-          <b-col md="4">
+          <b-col md="5">
             <div id="col2" class="container col-md-12">
               <b-card
+                id="Cardview"
                 title="Trending"
-                align="right"
+                align="center"
                 tag="article"
-                style="max-width: 50rem"
-                class="mb-8"
+                class="md-12"
               >
                 <!-- list group -->
                 <b-list-group>
@@ -357,6 +344,27 @@ export default {
 </script>
 
 <style scoped>
+#header-image {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 100%;
+  margin-top: 30px;
+  flex-flow: row;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+@media (max-width: 400px) {
+  #header-image {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+#Cardview {
+  display: flex;
+  width: 100%;
+  flex: 50%;
+}
 #shares {
   margin: 10px;
 }
@@ -380,16 +388,48 @@ export default {
   border: #168e2a 2px solid;
   border-radius: 12px;
 }
-#imageViewStory {
-  width: 80%;
-  height: 40vh;
-  max-height: 40vh;
+
+#embedSource {
+  flex: 50%;
+  justify-content: center;
 }
+
+#imageViewStory {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 50%;
+  flex-flow: row;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+  #imageViewStory,
+  #embedSource {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
 #viewstory {
   color: #808080;
 }
+
 #commentSect {
-  color: #808080;
+  color: #f19124;
+  font-weight: 600;
+  margin-top: 20px;
+  font-size: 16px;
+}
+#showUS {
+  color: #f19124;
+}
+#showUS:hover {
+  color: #168e2a;
+}
+
+#commentSect:hover {
+  color: #168e2a;
   font-weight: 600;
   font-size: 16px;
 }

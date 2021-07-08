@@ -2,20 +2,20 @@
   <div id="dashboard">
     <div class="col-md-12 text-center">
       <div id="header-image" class="">
-        <img :src="header" width="100%" height="150vh" align="center" />
+        <img :src="header" align="center" style="width: 100%" />
       </div>
     </div>
     <b-container id="newsSection" class="bv-example-row">
       <b-row>
-        <b-col md="8" cols="12">
+        <b-col md="9" cols="12">
           <!--News-->
           <h4 class="text-center">News</h4>
           <br />
 
-          <div class="col-md-12 d-flex">
+          <div id="selcetor" class="col-md-12 d-flex">
             <v-select
               v-model="cats"
-              placeholder="Search..."
+              placeholder="   Search..."
               class="style-chooser col-md-5"
               :options="options"
             ></v-select>
@@ -31,20 +31,29 @@
           <!--Fecth Div-->
 
           <div id="fetch">
-            <div id="StoryAll" class="with-header">
-              <div v-for="(story, id) in stories" v-bind:key="id" class="collection-item">
-                <div>
+            <div class="with-header">
+              <div
+                v-for="(story, id) in stories"
+                v-bind:key="id"
+                class="flexbox-container"
+              >
+                <div class="flexbox-item">
                   <router-link
                     v-bind:to="{ name: 'viewstory', params: { story_id: story.id } }"
                   >
                     <router-link
                       v-bind:to="{ name: 'viewstory', params: { story_id: story.id } }"
                     >
-                      <h5 id="titleStory" style="height: 140px">{{ story.Title }}</h5>
+                      <h5 id="titleStory">{{ story.Title }}</h5>
                     </router-link>
 
-                    <div id="hoverImage" class="col-md-8">
-                      <b-img class="story-image" :src="story.image" alt="" />
+                    <div id="hoverImage" class="col-md-12">
+                      <b-img
+                        class="story-image"
+                        :src="story.image"
+                        style="width: 100%"
+                        alt=""
+                      />
 
                       <div class="col-md-4">
                         <p id="cats">{{ story.Category }}</p>
@@ -90,7 +99,7 @@
         </b-col>
 
         <!--Predictions-->
-        <b-col md="4">
+        <b-col md="3">
           <h4 class="text-center">Predictions</h4>
 
           <div class="col-md-12">
@@ -126,7 +135,10 @@ export default {
   name: "dashboard",
   data() {
     return {
+      slide: 0,
+      sliding: null,
       header: require("@/assets/img/header.jpg"),
+      header2: require("@/assets/img/header2.jpg"),
       stories: [],
       category: "Football",
       cats: null,
@@ -160,6 +172,14 @@ export default {
       });
   },
   methods: {
+    onSlideStart: function (slide) {
+      console.log(slide);
+      this.sliding = true;
+    },
+    onSlideEnd: function (slide) {
+      console.log(slide);
+      this.sliding = false;
+    },
     SearchCat() {
       this.stories.splice(this.stories);
       db.collection("Stories")
@@ -211,10 +231,48 @@ export default {
   padding: 8px;
   border-radius: 4px;
 }
+.flexbox-item {
+  max-width: 500px;
+  width: 450px;
+  justify-content: center;
+}
+@media (max-width: 500px) {
+  .flexbox-item {
+    flex: 100%;
+    width: 100%;
+  }
+}
+.flexbox-container {
+  display: flex;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+.story-image {
+  display: flex;
+  flex: 100%;
+  justify-content: center;
+}
+#selcetor {
+  display: flex;
+}
 #header-image {
-  max-width: 100%;
-  min-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 100%;
   margin-top: 30px;
+  flex-flow: row;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+  #header-image,
+  .story-image {
+    flex: 100%;
+    max-width: 100%;
+  }
 }
 #newsSection {
   margin-top: 60px;
@@ -234,9 +292,16 @@ export default {
   scroll-behavior: inherit;
 }
 #story-child {
-  margin: 8px;
-  height: 70vh;
-  max-height: 70vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex: 100%;
+  flex-grow: 1;
+  margin-top: 30px;
+  width: 600px;
+  flex-flow: row;
+  justify-content: center;
+  max-height: 130vh;
   margin: 10px;
 }
 #story-head {
@@ -252,9 +317,8 @@ export default {
   font-size: 24px;
   color: rgb(61, 59, 59);
   text-align: center;
-  height: 90px;
-  max-width: 500px;
-  margin-top: 100px;
+  display: flex;
+  max-width: 100%;
   text-overflow: ellipsis;
 }
 
@@ -290,15 +354,6 @@ export default {
   color: #168e2a;
   border-radius: 8px;
   font-weight: 600;
-}
-
-.story-image {
-  width: 90%;
-  max-width: 90%;
-  min-width: 90%;
-  height: 40vh;
-  position: center;
-  max-height: 50vh;
 }
 
 h3 {
