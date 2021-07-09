@@ -1,150 +1,128 @@
 <template>
   <div>
-    <div id="dashboard">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light col-md-12">
-        <div class="col-md-9" id="navbarTogglerDemo01">
-          <a class="navbar-brand" href="#"><img id="Gmlogo" :src="logo" /></a>
-        </div>
+    <div>
+      <b-card title="Card Title" no-body>
+        <b-card-header header-tag="nav">
+          <b-nav>
+            <b-nav-item>
+              <a href="/">
+                <img id="GmLogo" fluid-grow width="20%" :src="logo" alt="" />
+              </a>
+            </b-nav-item>
+            <b-nav-item> </b-nav-item>
+          </b-nav>
+        </b-card-header>
 
-        <div id="selcetor" class="col-md-7 d-flex">
-          <v-select
-            style="margin: 10px"
-            v-model="cats"
-            placeholder="   Search..."
-            class="style-chooser"
-            :options="options"
-          ></v-select>
-          <button
-            style="margin: 10px"
-            @click="SearchCat(cats)"
-            class="btn-floating btn-normal orange"
-          >
-            <i class="ri-search-line"></i>Search
-          </button>
-        </div>
-
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarTogglerDemo01"
-          aria-controls="navbarTogglerDemo01"
-          aria-expanded="true"
-          aria-label="Toggle navigation"
+        <b-card-body class="text-right">
+          <div id="selcetor" class="d-flex text-right">
+            <v-select
+              style="margin: 10px"
+              v-model="cats"
+              placeholder="   Search..."
+              class="style-chooser"
+              :options="options"
+            ></v-select>
+            <button
+              style="margin: 10px"
+              @click="SearchCat(cats)"
+              class="btn-floating btn-small orange"
+            >
+              <i class="ri-search-line"></i>Search
+            </button>
+          </div></b-card-body
         >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </nav>
-
-      <div class="col-md-12 text-center">
-        <div id="header-image" class="">
-          <img :src="header" align="center" style="width: 100%" />
+      </b-card>
+    </div>
+    <div>
+      <div id="dashboard">
+        <div class="col-md-12 text-center">
+          <div id="header-image" class="">
+            <img :src="header" align="center" style="width: 100%" />
+          </div>
         </div>
-      </div>
-      <b-container id="newsSection" class="bv-example-row">
-        <b-row>
-          <b-col md="9" cols="12">
-            <!--News-->
-            <h4 class="text-center">News</h4>
-            <br />
+        <b-container id="newsSection" class="bv-example-row">
+          <b-row>
+            <b-col md="12" cols="12">
+              <!--News-->
+              <h4 class="text-left">News</h4>
+              <br />
 
-            <!--Fecth Div-->
+              <!--Fecth Div-->
 
-            <div id="fetch">
-              <div class="with-header">
-                <div
-                  v-for="(story, id) in stories"
-                  v-bind:key="id"
-                  class="flexbox-container"
-                >
-                  <div class="flexbox-item">
+              <div class="row" id="fetch">
+                <div class="with-header flexbox-container">
+                  <div v-for="(story, id) in stories" v-bind:key="id" class="col-md-4">
                     <router-link
-                      v-bind:to="{ name: 'viewstory', params: { story_id: story.id } }"
+                      v-bind:to="{
+                        name: 'viewstory',
+                        params: { story_id: story.id },
+                      }"
                     >
-                      <router-link
-                        v-bind:to="{ name: 'viewstory', params: { story_id: story.id } }"
-                      >
-                        <h5 id="titleStory">{{ story.Title }}</h5>
-                      </router-link>
+                      <b-card-group>
+                        <b-card
+                          id="CardView"
+                          :header="story.timestamp"
+                          :img-src="story.image"
+                          img-top
+                          tag="article"
+                          style="max-height: 100rem"
+                          :footer="story.Category"
+                          class="flexbox-item col-md-12"
+                        >
+                          <b-card-text>
+                            <h5>{{ story.Title }}</h5>
+                          </b-card-text>
+                          <div id="story-head" class="story-title text-center">
+                            <div class="container-fluid container-xl d-flex">
+                              <div id="commentSect">
+                                <i id="showUS" class="ri-heart-3-fill">
+                                  {{ story.Like }}</i
+                                >
+                              </div>
 
-                      <div id="hoverImage" class="col-md-12">
-                        <b-img
-                          class="story-image"
-                          :src="story.image"
-                          style="width: 100%"
-                          alt=""
-                        />
-
-                        <div class="col-md-4">
-                          <p id="cats">{{ story.Category }}</p>
-                        </div>
-                      </div>
+                              <div id="commentSect">
+                                <i id="showUS" class="ri-chat-3-fill">
+                                  {{ story.Comment }}
+                                </i>
+                              </div>
+                            </div>
+                          </div>
+                        </b-card>
+                      </b-card-group>
                     </router-link>
-
-                    <div id="story-head" class="story-title text-center">
-                      <div class="col-md-9 container-fluid container-xl d-flex">
-                        <div>
-                          <span
-                            id="showUS"
-                            class="iconify"
-                            data-icon="ant-design:like-filled"
-                            data-inline="false"
-                            data-width="24"
-                            data-height="24"
-                          >
-                            {{ story.Like }}
-                          </span>
-                          <span id="commentSect">{{ story.Like }}</span>
-                        </div>
-
-                        <div>
-                          <span
-                            id="showUS"
-                            class="iconify"
-                            data-icon="ri:chat-3-fill"
-                            data-inline="false"
-                            data-width="24"
-                            data-height="24"
-                          >
-                            {{ story.Comment }}
-                          </span>
-                          <span>{{ story.Comment }}</span>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </b-col>
+            </b-col>
 
-          <!--Predictions-->
-          <b-col md="3">
-            <h4 class="text-center">Predictions</h4>
+            <!--Predictions-->
+            <b-col md="3">
+              <h4 class="text-left">Predictions</h4>
 
-            <div class="col-md-12">
-              <div class="sidebar">
-                <h4 class="sidebar-title">Leagues</h4>
-                <b-card id="prediction" class="sidebar-item tags">
-                  <ul>
-                    <li><a href="#">EPL</a></li>
-                    <li><a href="#">Bundesliga</a></li>
-                    <li><a href="#">LA LIGA</a></li>
-                    <li><a href="#">Ligue 1</a></li>
-                    <li><a href="#">Eredivisie</a></li>
-                    <li><a href="#">Kpl</a></li>
-                  </ul>
-                </b-card>
+              <div class="col-md-12">
+                <div class="sidebar">
+                  <h4 class="sidebar-title">Leagues</h4>
+                  <b-card id="prediction" class="sidebar-item tags">
+                    <ul>
+                      <li><a href="#">EPL</a></li>
+                      <li><a href="#">Bundesliga</a></li>
+                      <li><a href="#">LA LIGA</a></li>
+                      <li><a href="#">Ligue 1</a></li>
+                      <li><a href="#">Eredivisie</a></li>
+                      <li><a href="#">Kpl</a></li>
+                    </ul>
+                  </b-card>
+                </div>
               </div>
-            </div>
-          </b-col>
-        </b-row>
-      </b-container>
+            </b-col>
+          </b-row>
+        </b-container>
 
-      <div class="fixed-action-btn">
-        <a href="" class="btn-floating btn-large orange">
-          <i class="ri-refresh-line"></i>
-        </a>
+        <div class="fixed-action-btn">
+          <a href="" class="btn-floating btn-large orange">
+            <i class="ri-refresh-line"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -156,6 +134,7 @@ export default {
   name: "dashboard",
   data() {
     return {
+      timestamp: "",
       logo: require("@/assets/logo.png"),
       slide: 0,
       sliding: null,
@@ -247,41 +226,27 @@ export default {
 </script>
 
 <style>
-#Gmlogo {
-  min-width: 20%;
-  width: 30px;
-  flex: 50%;
-  justify-content: start;
-}
-#nav-item {
-  justify-content: end;
-  font-weight: 500;
-  font-size: 16px;
-  color: #f19124;
-}
-#nav-item:hover {
-  font-weight: 500;
-  font-size: 16px;
-  color: #08da4e;
-}
-#nav-bar-menu {
-  width: 100%;
+#CardView {
   display: flex;
-  background: #fff;
-  padding: 100px;
-  height: 70px;
+  flex-wrap: wrap;
+  margin: 10px;
+  flex-direction: row;
+  padding: 0px 0px 0px 0px;
 }
-.left {
-  background: #fff;
-  color: #000;
+#navbar {
+  display: flex;
+  width: 100%;
+  padding: 100px;
 }
 
-.navbar {
+#Gmlogo {
+  flex: 100%;
+  width: 100px;
+  width: 200px;
+  height: 40vh;
+}
+#navcard {
   display: flex;
-  padding: 10px;
-  height: 10vh;
-  max-height: 30vh;
-  justify-self: center;
 }
 #btnSearch {
   background: transparent;
@@ -290,38 +255,37 @@ export default {
   border-radius: 4px;
 }
 .flexbox-item {
-  max-width: 500px;
-  width: 450px;
+  max-width: 370px;
+  width: 370px;
   justify-content: center;
 }
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   .flexbox-item {
     flex: 100%;
     width: 100%;
+    max-height: 40vh;
   }
 }
 .flexbox-container {
   display: flex;
-  margin-top: 40px;
-  flex-wrap: wrap-reverse;
   flex-direction: row;
+  align-items: stretch;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.img {
+  transform: scale(1.5);
 }
 .story-image {
-  display: flex;
   flex: 100%;
+  height: 300px;
   justify-content: center;
 }
-#selcetor {
-  display: flex;
-}
+
 #header-image {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   flex: 100%;
-  margin-top: 30px;
-  flex-flow: row;
-  justify-content: center;
-  vertical-align: middle;
 }
 
 @media (max-width: 600px) {

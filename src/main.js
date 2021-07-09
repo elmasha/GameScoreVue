@@ -8,7 +8,6 @@ import * as VueAos from 'vue-aos'
 import moment from 'moment'
 
 
-
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-select/dist/vue-select.css';

@@ -36,7 +36,7 @@
               <div class="col-md-12 container-fluid d-flex">
                 <div id="commentSect" v-on: @click="LikeCount()">
                   <span>
-                    <i id="showUS" class="ri-thumb-up-fill"> {{ like }} </i></span
+                    <i id="showUS" class="ri-heart-3-fill"> {{ like }} </i></span
                   >
                 </div>
 
@@ -348,9 +348,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   flex: 100%;
-  margin-top: 30px;
-  flex-flow: row;
-  justify-content: center;
+  flex-flow: column;
   vertical-align: middle;
 }
 
@@ -364,6 +362,8 @@ export default {
   display: flex;
   width: 100%;
   flex: 50%;
+  flex-wrap: wrap;
+  height: 40vh;
 }
 #shares {
   margin: 10px;
