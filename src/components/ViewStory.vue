@@ -106,38 +106,19 @@
           <!---Col No.2-->
           <b-col md="5">
             <div id="col2" class="container col-md-12">
-              <b-card
-                id="Cardview"
-                title="Trending"
-                align="center"
-                tag="article"
-                class="md-12"
-              >
-                <!-- list group -->
-                <b-list-group>
-                  <!-- list item-->
-                  <b-list-group-item
-                    href="#"
-                    class="flex-column align-items-start"
-                    v-for="story in stories"
-                    v-bind:key="story.id"
-                  >
-                    <router-link
-                      id="readMore"
-                      v-bind:to="{ name: 'viewstory', params: { story_id: story.id } }"
-                    >
-                      <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" style="width: 500px">{{ story.Title }}</h5>
-                        <small> </small>
-                      </div>
-                    </router-link>
-
-                    <p class="mb-1">
-                      <!-- {{ story.Story }} -->
-                    </p>
-                  </b-list-group-item>
-                </b-list-group>
-              </b-card>
+              <h5>Trending</h5>
+              <div v-for="story in stories" v-bind:key="story.id">
+                <b-card
+                  id="Cardview"
+                  align="left"
+                  tag="article"
+                  class="flexbox-item col-md-12"
+                  style="max-width: 300rem"
+                  :header="story.Title"
+                >
+                  <!-- list group -->
+                </b-card>
+              </div>
             </div>
           </b-col>
         </b-row>
@@ -344,6 +325,19 @@ export default {
 </script>
 
 <style scoped>
+.flexbox-item {
+  margin-top: 40px;
+  max-width: 300px;
+  width: 300px;
+  justify-content: center;
+}
+@media (max-width: 400px) {
+  .flexbox-item {
+    flex: 100%;
+    width: 100%;
+    max-height: 40vh;
+  }
+}
 #header-image {
   display: flex;
   flex-wrap: wrap;
@@ -359,11 +353,14 @@ export default {
   }
 }
 #Cardview {
+  max-width: 300px;
+  width: 300px;
   display: flex;
   width: 100%;
+  flex-direction: column;
+  flex-flow: row;
   flex: 50%;
-  flex-wrap: wrap;
-  height: 40vh;
+  flex-wrap: nowrap;
 }
 #shares {
   margin: 10px;
