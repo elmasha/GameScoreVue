@@ -3,25 +3,17 @@
     <div class="footer-top">
       <div class="container">
         <div class="row gy-8">
-          <div id="conTact" class="col-lg-5 col-md-12 footer-info">
-            <a href="index.html" class="logo d-flex align-items-center">
-              <img :src="logo" alt="" />
-            </a>
-            <div>
-              <h4 id="contacth4">Contact Us</h4>
-              <p>
-                Kisumu, KSM 9451 Kenya
-                <strong>|Phone:</strong> +254 70 511 675<br />
-                <strong>Email:</strong> marvin@gamescore.co.ke<br />
-              </p>
-            </div>
-
-            <div class="social-links mt-3"></div>
-          </div>
-
-          <div class="col-lg-7 col-md-12 footer-contact text-center text-md-end">
+          <div class="col-md-12 footer-contact text-center text-md-end">
             <div>
               <br /><br />
+              <a href="/" class="justify-content-rigt">
+                <img id="imagelogo" :src="logo" alt="" />
+              </a>
+              <div>
+                <router-link to="/contacts"
+                  ><strong><h2 id="contacth4">Contact Us</h2></strong></router-link
+                >
+              </div>
               <p id="followus"><strong>Follow us on</strong></p>
               <a id="shares" href="https://www.twitter.com/gamescoreske" class="twitter">
                 <i class="ri-twitter-line btn-floating btn-small blue"></i>
@@ -80,14 +72,27 @@ export default {
   align-self: flex-end;
   margin-bottom: 20px;
 }
+
+#imagelogo {
+  width: 25%;
+}
+
+@media (max-width: 300px,) {
+  #gamimagelogoelogo {
+    flex: 50%;
+    width: 50%;
+  }
+}
 #shares {
   margin: 2px;
 }
 #contacth4 {
   color: black;
 }
+#contacth4:hover {
+  color: #f19124;
+}
 #conTact {
-  background: #d0d4fc52;
   padding: 10px;
   margin: 10px;
   border-radius: 20px;
@@ -95,7 +100,7 @@ export default {
 
 #conTact:hover {
   color: #fff;
-  background: #c2c3c9ad;
+  background: #d3d3d3ad;
   padding: 10px;
   margin: 10px;
   border-radius: 20px;

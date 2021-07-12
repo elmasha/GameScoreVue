@@ -5,6 +5,7 @@ import Login from '@/components/Login.vue'
 import AddStory from '@/components/AddStory.vue'
 import ViewStory from '@/components/ViewStory.vue'
 import Register from '@/components/Register.vue'
+import Contacts from '@/components/Contacts.vue'
 
 
 
@@ -16,9 +17,19 @@ const routes = [{
         component: Dashboard
     },
     {
+        path: '/contacts',
+        name: 'contacts',
+        component: Contacts
+    },
+    {
         path: '/login',
         name: 'login',
         component: Login
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register
     },
     {
         path: '/addStory',
@@ -30,11 +41,8 @@ const routes = [{
         name: 'viewstory',
         component: ViewStory
     },
-    {
-        path: '/Register',
-        name: 'register',
-        component: Register
-    }
+  
+   
 ]
 
 const router = new VueRouter({

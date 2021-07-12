@@ -1,37 +1,58 @@
 <template>
   <div>
-    <div>
-      <b-card title="Card Title" no-body>
-        <b-card-header header-tag="nav">
-          <b-nav>
-            <b-nav-item>
-              <a href="/">
-                <img id="GmLogo" fluid-grow width="20%" :src="logo" alt="" />
-              </a>
-            </b-nav-item>
-            <b-nav-item> </b-nav-item>
-          </b-nav>
-        </b-card-header>
+    <div id="navlinks" class="container">
+      <p></p>
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="/"><img id="gamelogo" :src="logo" alt="" /></a>
+        </li>
+      </ul>
 
-        <b-card-body class="text-right">
-          <div id="selcetor" class="d-flex text-right">
+      <ul class="nav justify-content-end">
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li> -->
+        <li>
+          <div id="selcetor" class="col-md-12 container-xl d-flex">
             <v-select
-              style="margin: 10px"
               v-model="cats"
               placeholder="   Search..."
-              class="style-chooser"
+              class="col-md-6"
               :options="options"
             ></v-select>
-            <button
-              style="margin: 10px"
+
+            <i
               @click="SearchCat(cats)"
-              class="btn-floating btn-small orange"
-            >
-              <i class="ri-search-line"></i>Search
-            </button>
-          </div></b-card-body
-        >
-      </b-card>
+              style="margin: 10px"
+              class="ri-search-line col-md-6"
+            ></i>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="nav justify-content-rigt">
+        <li class="nav-item">
+          <a id="navlinks" class="nav-link" href="#">Livescore</a>
+        </li>
+        <li class="nav-item">
+          <a id="navlinks" class="nav-link" href="#">Predictions</a>
+        </li>
+        <li id="youtubeLink" class="nav-item">
+          <a
+            id="youtubeText"
+            class="nav-link"
+            href="https://www.youtube.com/channel/UCVVXonDa0QM4q6RSkUNG4ag"
+          >
+            <span id="yticon"
+              >Watch Live<i class="ri-youtube-fill" width="38px;" height="38px"></i
+            ></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <b-card title="Card Title" no-body> </b-card>
     </div>
     <div>
       <div id="dashboard">
@@ -119,7 +140,7 @@
         </b-container>
 
         <div class="fixed-action-btn">
-          <a href="" class="btn-floating btn-large orange">
+          <a href="" class="btn-floating btn-large green">
             <i class="ri-refresh-line"></i>
           </a>
         </div>
@@ -141,7 +162,7 @@ export default {
       header: require("@/assets/img/header.jpg"),
       header2: require("@/assets/img/header2.jpg"),
       stories: [],
-      category: "Football",
+      category: "",
       cats: null,
       options: ["Football", "Boxing", "Rugby", "Hockey", "Tennis"],
       select2: [],
@@ -226,10 +247,47 @@ export default {
 </script>
 
 <style>
+#yticon {
+  margin: 5px;
+  margin-bottom: 20px;
+}
+#youtubeLink {
+  background: rgb(245, 3, 3);
+  border-radius: 8px;
+  color: #fff;
+  transition: 0.3s;
+}
+#youtubeLink:hover {
+  background: transparent;
+  border: solid 1px rgb(245, 3, 3);
+  border-radius: 8px;
+  color: rgb(245, 3, 3);
+}
+#youtubeText {
+  color: #fff;
+}
+#youtubeText:hover {
+  color: rgb(245, 3, 3);
+}
+
+a {
+  color: #f19124;
+}
+#gamelogo {
+  width: 25%;
+}
+
+@media (max-width: 360px) {
+  #gamelogo {
+    flex: 50%;
+    width: 50%;
+  }
+}
+
 #CardView {
   display: flex;
   flex-wrap: wrap;
-  margin: 10px;
+  margin: 8px;
   flex-direction: row;
   padding: 0px 0px 0px 0px;
 }
@@ -244,6 +302,10 @@ export default {
   width: 100px;
   width: 200px;
   height: 40vh;
+}
+
+.nav-link {
+  color: #f19124;
 }
 #navcard {
   display: flex;
@@ -405,5 +467,26 @@ h4:hover {
   color: #08da4e;
   font-size: 18px;
   font-weight: 400;
+}
+#fetch {
+  background: rgb(243, 243, 243);
+  border-radius: 6px;
+  padding: 10px;
+}
+#navlinks {
+  color: #f68c09;
+  animation: nav-load ease-in 200ms;
+}
+
+@keyframes nav-load {
+  0% {
+    transform: translate(-100%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+#navlinks:hover {
+  color: #08da4e;
 }
 </style>

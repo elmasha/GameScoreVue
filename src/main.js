@@ -2,10 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import { BootstrapVue, IconsPlugin, BNavbar } from 'bootstrap-vue'
-import vSelect from 'vue-select'
 import Vuesax from 'vuesax'
 import * as VueAos from 'vue-aos'
 import moment from 'moment'
+import VSelect from '@alfsnd/vue-bootstrap-select'
+
 
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -32,7 +33,7 @@ Vue.use(BootstrapVue)
     // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
     ///Vue select
-Vue.component('v-select', vSelect)
+Vue.component('v-select',VSelect)
 Vue.component('b-navbar', BNavbar)
 
 
