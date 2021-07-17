@@ -212,6 +212,7 @@ export default {
             console.log(doc.data());
             const data = {
               id: doc.id,
+
               Title: doc.data().title,
               Story: doc.data().story,
               Category: doc.data().category,
