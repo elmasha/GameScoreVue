@@ -6,6 +6,8 @@ import Vuesax from 'vuesax'
 import * as VueAos from 'vue-aos'
 import moment from 'moment'
 import VSelect from '@alfsnd/vue-bootstrap-select'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 
 
@@ -35,6 +37,11 @@ Vue.use(IconsPlugin)
     ///Vue select
 Vue.component('v-select',VSelect)
 Vue.component('b-navbar', BNavbar)
+
+
+
+
+Vue.use(Vuetify)
 
 
 

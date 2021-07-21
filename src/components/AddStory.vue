@@ -48,7 +48,7 @@
           <v-select
             class="col-md-6"
             v-model="type"
-            :options="['Prediction', 'Stories']"
+            :options="['Predictions', 'Stories']"
           />
           <br /><br /><br />
           <h5>You selected: {{ type }}</h5>
