@@ -56,7 +56,7 @@
                 ></span>
               </div>
 
-              <div id="socialmedia" class="col-md-12 container-fluid d-flex">
+              <!--<div id="socialmedia" class="col-md-12 container-fluid d-flex">
                 <i
                   id="shares"
                   @click.prevent="ShareBtn"
@@ -65,13 +65,15 @@
                 <i id="shares" class="ri-twitter-line btn-floating btn-small blue"></i>
                 <i id="shares" class="ri-instagram-line btn-floating btn-small red"></i>
 
-                <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <div class="addthis_inline_share_toolbox"></div>
-              </div>
+              </div>  -->
+              <div class="elfsight-app-d4e75d53-2caf-418d-9b3e-76a3c4fe7740"></div>
               <hr />
 
               <div class="col-md-12" id="story-view-story">
                 <p>{{ story }}</p>
+
+                <p><a :href="otherLinks"></a></p>
               </div>
 
               <div>
@@ -278,7 +280,7 @@ export default {
     },
     Writecomment() {
       if (this.comments == null) {
-        alert("Comment is null");
+        alert("Comment is empty");
       } else {
         db.collection("Stories")
           .doc(this.$route.params.story_id)
@@ -325,6 +327,12 @@ export default {
 </script>
 
 <style scoped>
+p {
+  text-indent: 50px;
+  text-align: justify;
+  letter-spacing: 1px;
+}
+
 .flexbox-item {
   margin-top: 40px;
   max-width: 300px;
@@ -344,6 +352,7 @@ export default {
   flex: 100%;
   flex-flow: column;
   vertical-align: middle;
+  margin-top: 30px;
 }
 
 @media (max-width: 400px) {

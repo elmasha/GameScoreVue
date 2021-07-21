@@ -117,33 +117,71 @@
             </b-col>
 
             <!--Predictions-->
-            <b-col md="3">
+            <b-col md="5">
               <h4 class="text-left">Predictions</h4>
 
               <div class="col-md-12">
                 <div class="sidebar">
-                  <h4 class="sidebar-title">Leagues</h4>
-                  <b-card id="prediction" class="sidebar-item tags">
-                    <ul>
-                      <li><a href="#">EPL</a></li>
-                      <li><a href="#">Bundesliga</a></li>
-                      <li><a href="#">LA LIGA</a></li>
-                      <li><a href="#">Ligue 1</a></li>
-                      <li><a href="#">Eredivisie</a></li>
-                      <li><a href="#">Kpl</a></li>
-                    </ul>
-                  </b-card>
+                  <div class="row" id="fetch">
+                    <div class="with-header flexbox-container">
+                      <div
+                        v-for="(predict, id) in predictions"
+                        v-bind:key="id"
+                        class="col-md-5"
+                      >
+                        <router-link
+                          v-bind:to="{
+                            name: 'viewstory',
+                            params: { predict_id: predict.id },
+                          }"
+                        >
+                          <b-card-group>
+                            <b-card
+                              id="CardView"
+                              :header="predict.timestamp"
+                              :img-src="predict.image"
+                              img-top
+                              tag="article"
+                              style="max-height: 100rem"
+                              :footer="predict.Category"
+                              class="flexbox-item col-md-12"
+                            >
+                              <b-card-text>
+                                <h5>{{ predict.Title }}</h5>
+                              </b-card-text>
+                              <div id="story-head" class="story-title text-center">
+                                <div class="container-fluid container-xl d-flex">
+                                  <div id="commentSect">
+                                    <i id="showUS" class="ri-heart-3-fill">
+                                      {{ predict.Like }}</i
+                                    >
+                                  </div>
+
+                                  <div id="commentSect">
+                                    <i id="showUS" class="ri-chat-3-fill">
+                                      {{ predict.Comment }}
+                                    </i>
+                                  </div>
+                                </div>
+                              </div>
+                            </b-card>
+                          </b-card-group>
+                        </router-link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </b-col>
           </b-row>
+          <div class="elfsight-app-d4e75d53-2caf-418d-9b3e-76a3c4fe7740"></div>
         </b-container>
 
-        <div class="fixed-action-btn">
+        <!--<div class="fixed-action-btn">
           <a href="" class="btn-floating btn-large green">
             <i class="ri-refresh-line"></i>
           </a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -151,6 +189,7 @@
 
 <script>
 import db from "./firebaseInit";
+//import firebase from "firebase";
 export default {
   name: "dashboard",
   data() {
@@ -162,6 +201,7 @@ export default {
       header: require("@/assets/img/header.jpg"),
       header2: require("@/assets/img/header2.jpg"),
       stories: [],
+      predictions: [],
       category: "",
       cats: null,
       options: ["Football", "Boxing", "Rugby", "Hockey", "Tennis"],
@@ -173,9 +213,15 @@ export default {
   },
   computed() {
     this.FetchData;
+    this.FetchPredictions;
   },
   mounted() {
+    //const  startfulldate = new Date();
+    let start = new Date("2020-01-01");
+    //var currentTime = firebase.firestore.Timestamp.fromDate(new Date(804800000));
+    //var searchDate = new Date(currentTime);
     db.collection("Stories")
+      .where("timestamp", ">", start)
       .get()
       .then((queryResult) => {
         queryResult.forEach((doc) => {
@@ -190,6 +236,25 @@ export default {
             Like: doc.data().like,
           };
           this.stories.push(data);
+        });
+      });
+
+    db.collection("Predictions")
+      .where("timestamp", ">", start)
+      .get()
+      .then((queryResult) => {
+        queryResult.forEach((doc) => {
+          console.log(doc.data());
+          const data = {
+            id: doc.id,
+            Title: doc.data().title,
+            Category: doc.data().category,
+            Story: doc.data().story,
+            image: doc.data().image,
+            Comment: doc.data().comment,
+            Like: doc.data().like,
+          };
+          this.predictions.push(data);
         });
       });
   },
@@ -224,8 +289,31 @@ export default {
           });
         });
     },
+    FetchPredictions() {
+      // let start = new Date("2020-01-01");
+      db.collection("Predictions")
+        .get()
+        .then((queryResult) => {
+          queryResult.forEach((doc) => {
+            console.log(doc.data());
+            const data = {
+              id: doc.id,
+              Title: doc.data().title,
+              Category: doc.data().category,
+              Story: doc.data().story,
+              image: doc.data().image,
+              Comment: doc.data().comment,
+              Like: doc.data().like,
+            };
+            this.predictions.push(data);
+          });
+        });
+    },
     FetchData() {
+      //  var currentTime = firebase.firestore.Timestamp.fromDate(new Date(804800000));
+      let start = new Date("2021-01-01");
       db.collection("Stories")
+        .where("timestamp", ">", start)
         .get()
         .then((queryResult) => {
           queryResult.forEach((doc) => {
@@ -278,7 +366,7 @@ a {
   width: 25%;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 350px) {
   #gamelogo {
     flex: 50%;
     width: 50%;

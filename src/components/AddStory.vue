@@ -23,7 +23,15 @@
           <v-select
             class="col-md-6"
             v-model="category"
-            :options="['Football', 'Boxing', 'Rugby', 'Hockey', 'Tennis', 'Sponsored']"
+            :options="[
+              'Football',
+              'Boxing',
+              'Rugby',
+              'Hockey',
+              'Tennis',
+              'Sponsored',
+              'News',
+            ]"
           />
           <br /><br /><br />
           <h5>You selected: {{ category }}</h5>
@@ -32,6 +40,23 @@
         <div class="row form-group cols-9 md-9">
           <label id="label" for="title">Enter story title</label>
           <input type="text" placeholder="Tile" v-model="title" id="title" />
+        </div>
+
+        <div class="row form-group">
+          <br />
+          <label id="label" for="title">Select type of Story</label>
+          <v-select
+            class="col-md-6"
+            v-model="type"
+            :options="['Prediction', 'Stories']"
+          />
+          <br /><br /><br />
+          <h5>You selected: {{ type }}</h5>
+        </div>
+
+        <div class="row form-group cols-9 md-9">
+          <label id="label" for="sub-title">Enter sub-title</label>
+          <input type="text" placeholder="Sub Title" v-model="subtitle" id="sub-title" />
         </div>
 
         <div class="row form-group cols-9 md-9">
@@ -82,9 +107,11 @@ export default {
   name: "addstroy",
   data() {
     return {
+      type: null,
       category: "Football",
       story_id: null,
       title: null,
+      subtitle: null,
       story: null,
       medialink: null,
       storylink: null,
@@ -101,48 +128,52 @@ export default {
     },
 
     UpoadStory() {
-      const storageRef = firebase
-        .storage()
-        .ref(`Storyimages/${this.imageData.name}`)
-        .put(this.imageData);
-      storageRef.on(
-        `state_changed`,
-        (snapshot) => {
-          this.uploadValue = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        },
-        (error) => {
-          console.log(error.message);
-        },
-        () => {
-          this.uploadValue = 100;
+      if (this.type == null) {
+        alert("Type of story is Null");
+      } else {
+        const storageRef = firebase
+          .storage()
+          .ref(`Storyimages/${this.imageData.name}`)
+          .put(this.imageData);
+        storageRef.on(
+          `state_changed`,
+          (snapshot) => {
+            this.uploadValue = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          },
+          (error) => {
+            console.log(error.message);
+          },
+          () => {
+            this.uploadValue = 100;
 
-          storageRef.snapshot.ref.getDownloadURL().then((url) => {
-            this.imageUrl = url;
-            const ref = db.collection("Stories").doc();
-            const doc_id = ref.id;
-            db.collection("Stories")
-              .doc(doc_id)
-              .set({
-                title: this.title,
-                story: this.story,
-                doc_ID: doc_id,
-                category: this.category,
-                instagramLink: this.medialink,
-                twitterLink: this.medialink,
-                otherLinks: this.medialink,
-                comment: 0,
-                like: 0,
-                image: url,
-                timestamp: new Date(),
-              })
-              .then((docRef) => {
-                console.log("Added id" + docRef);
-                this.$router.push("/");
-              })
-              .catch((error) => console.error(error));
-          });
-        }
-      );
+            storageRef.snapshot.ref.getDownloadURL().then((url) => {
+              this.imageUrl = url;
+              const ref = db.collection(this.type).doc();
+              const doc_id = ref.id;
+              db.collection(this.type)
+                .doc(doc_id)
+                .set({
+                  title: this.title,
+                  story: this.story,
+                  doc_ID: doc_id,
+                  category: this.category,
+                  instagramLink: this.medialink,
+                  twitterLink: this.medialink,
+                  otherLinks: this.medialink,
+                  comment: 0,
+                  like: 0,
+                  image: url,
+                  timestamp: new Date(),
+                })
+                .then((docRef) => {
+                  console.log("Added id" + docRef);
+                  this.$router.push("/");
+                })
+                .catch((error) => console.error(error));
+            });
+          }
+        );
+      }
     },
   },
 };
