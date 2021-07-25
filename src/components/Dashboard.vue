@@ -13,18 +13,18 @@
           <a class="nav-link" href="#">Link</a>
         </li> -->
         <li>
-          <div id="selcetor" class="col-md-12 container-xl d-flex">
+          <div id="selcetor" class="container-xl d-flex">
             <v-select
               v-model="cats"
               placeholder="   Search..."
-              class="col-md-6"
+              class="col-md-12"
               :options="options"
             ></v-select>
 
             <i
               @click="SearchCat(cats)"
-              style="margin: 10px"
-              class="ri-search-line col-md-6"
+              style="margin: 9px"
+              class="ri-search-line col-md-1"
             ></i>
           </div>
         </li>
@@ -117,57 +117,41 @@
             </b-col>
 
             <!--Predictions-->
-            <b-col md="5">
-              <h4 class="text-left">Predictions</h4>
+            <b-col md="12" cols="12">
+              <h4>Predictions</h4>
 
-              <div class="col-md-12">
-                <div class="sidebar">
-                  <div class="row" id="fetch">
-                    <div class="with-header flexbox-container">
-                      <div
-                        v-for="(predict, id) in predictions"
-                        v-bind:key="id"
-                        class="col-md-5"
+              <div class="">
+                <div class="row">
+                  <div class="d-flex flexbox-container">
+                    <div
+                      v-for="(predict, id2) in predictions"
+                      v-bind:key="id2"
+                      class="col-md-3"
+                    >
+                   
+                      <router-link
+                        v-bind:to="{
+                          name: 'viewpredicts',
+                          params: { predict_id: predict.id2 },
+                        }"
                       >
-                        <router-link
-                          v-bind:to="{
-                            name: 'viewstory',
-                            params: { predict_id: predict.id },
-                          }"
-                        >
-                          <b-card-group>
-                            <b-card
-                              id="CardView"
-                              :header="predict.timestamp"
-                              :img-src="predict.image"
-                              img-top
-                              tag="article"
-                              style="max-height: 100rem"
-                              :footer="predict.Category"
-                              class="flexbox-item col-md-12"
-                            >
-                              <b-card-text>
-                                <h5>{{ predict.Title }}</h5>
-                              </b-card-text>
-                              <div id="story-head" class="story-title text-center">
-                                <div class="container-fluid container-xl d-flex">
-                                  <div id="commentSect">
-                                    <i id="showUS" class="ri-heart-3-fill">
-                                      {{ predict.Like }}</i
-                                    >
-                                  </div>
-
-                                  <div id="commentSect">
-                                    <i id="showUS" class="ri-chat-3-fill">
-                                      {{ predict.Comment }}
-                                    </i>
-                                  </div>
-                                </div>
-                              </div>
-                            </b-card>
-                          </b-card-group>
-                        </router-link>
-                      </div>
+                        <b-card-group>
+                          <b-card
+                            id="PredictCard"
+                            :header="predict.Category2"
+                            :img-src="predict.image2"
+                            img-top
+                            tag="article"
+                            style="max-height: 100rem"
+                            class="flexbox-item d-flex col-md-12"
+                          >
+                            <b-card-text>
+                              <h5>{{ predict.Title2 }}</h5>
+                            </b-card-text>
+                            <div id="story-head" class="story-title text-center"></div>
+                          </b-card>
+                        </b-card-group>
+                      </router-link>
                     </div>
                   </div>
                 </div>
@@ -189,6 +173,7 @@
 
 <script>
 import db from "./firebaseInit";
+import db2 from "./firebaseInit";
 //import firebase from "firebase";
 export default {
   name: "dashboard",
@@ -210,6 +195,7 @@ export default {
   },
   created() {
     this.FetchData;
+    this.FetchPredictions;
   },
   computed() {
     this.FetchData;
@@ -239,22 +225,22 @@ export default {
         });
       });
 
-    db.collection("Predictions")
-      .where("timestamp", ">", start)
+    db2
+      .collection("Predictions")
       .get()
-      .then((queryResult) => {
-        queryResult.forEach((doc) => {
-          console.log(doc.data());
-          const data = {
-            id: doc.id,
-            Title: doc.data().title,
-            Category: doc.data().category,
-            Story: doc.data().story,
-            image: doc.data().image,
-            Comment: doc.data().comment,
-            Like: doc.data().like,
+      .then((queryResult6) => {
+        queryResult6.forEach((doc) => {
+          console.log("Predictions", doc.data());
+          const data4 = {
+            id2: doc.id,
+            Title2: doc.data().title,
+            Category2: doc.data().category,
+            Story2: doc.data().story,
+            image2: doc.data().image,
+            Comment2: doc.data().comment,
+            Like2: doc.data().like,
           };
-          this.predictions.push(data);
+          this.predictions.push(data4);
         });
       });
   },
@@ -291,21 +277,22 @@ export default {
     },
     FetchPredictions() {
       // let start = new Date("2020-01-01");
-      db.collection("Predictions")
+      db2
+        .collection("Predictions")
         .get()
-        .then((queryResult) => {
-          queryResult.forEach((doc) => {
-            console.log(doc.data());
-            const data = {
-              id: doc.id,
-              Title: doc.data().title,
-              Category: doc.data().category,
-              Story: doc.data().story,
-              image: doc.data().image,
-              Comment: doc.data().comment,
-              Like: doc.data().like,
+        .then((queryResult1) => {
+          queryResult1.forEach((doc) => {
+            console.log("Predictions", doc.data());
+            const data1 = {
+              id2: doc.id,
+              Title2: doc.data().title,
+              Category2: doc.data().category,
+              Story2: doc.data().story,
+              image2: doc.data().image,
+              Comment2: doc.data().comment,
+              Like2: doc.data().like,
             };
-            this.predictions.push(data);
+            this.predictions.push(data1);
           });
         });
     },

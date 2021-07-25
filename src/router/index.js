@@ -4,6 +4,7 @@ import Dashboard from '@/components/Dashboard.vue'
 import Login from '@/components/Login.vue'
 import AddStory from '@/components/AddStory.vue'
 import ViewStory from '@/components/ViewStory.vue'
+import ViewPredicts from '@/components/ViewPredicts.vue'
 import Register from '@/components/Register.vue'
 import Contacts from '@/components/Contacts.vue'
 
@@ -37,10 +38,17 @@ const routes = [{
         component: AddStory
     },
     {
+        path: '/:predict_id',
+        name: 'viewpredicts',
+        component: ViewPredicts
+    },
+   
+    {
         path: '/:story_id',
         name: 'viewstory',
         component: ViewStory
-    },
+    }
+    
   
    
 ]

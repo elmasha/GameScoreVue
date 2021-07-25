@@ -6,24 +6,14 @@
       </div>
     </div>
 
-    <!-- <b-container class="container">
-                    <b-row>
-                        <b-col>1 of 2</b-col>
-                        <b-col>2 of 2</b-col>
-                    </b-row>
-
-                    <b-row>
-                        <b-col>1 of 3</b-col>
-                        <b-col>2 of 3</b-col>
-                        <b-col>3 of 3</b-col>
-                    </b-row>
-            </b-container> -->
 
     <div class="col-md-12">
       <h3 id="story-view-title">{{ title }}</h3>
+      <h5 id="story-sub-title">{{ subtitle }}</h5>
       <div class="story-view-image col-md-9" align="center">
         <img id="imageViewStory" class="fluid" :src="imageUrl" alt="" />
       </div>
+
       <div id="time">
         <!-- <p>{{ timestamp }}</p> -->
       </div>
@@ -31,7 +21,7 @@
       <b-container class="row">
         <b-row>
           <!---Col No.1-->
-          <b-col md="7">
+          <b-col md="9">
             <div class="col-md-12">
               <div class="col-md-12 container-fluid d-flex">
                 <div id="commentSect" v-on: @click="LikeCount()">
@@ -73,6 +63,24 @@
               <div class="col-md-12" id="story-view-story">
                 <p>{{ story }}</p>
 
+                <div class="story-view-image col-md-9" align="center">
+                  <img id="imageViewStory1" class="fluid" :src="imageUrl2" alt="" />
+                </div>
+
+                <p>{{ story1 }}</p>
+
+                <div class="story-view-image col-md-9" align="center">
+                  <img id="imageViewStory1" class="fluid" :src="imageUrl3" alt="" />
+                </div>
+
+                <p>{{ story2 }}</p>
+
+                <div class="col-md-9" align="center">
+                  <img id="imageViewStory1" class="fluid" :src="imageUrl4" alt="" />
+                </div>
+
+                <p>{{ story3 }}</p>
+
                 <p><a :href="otherLinks"></a></p>
               </div>
 
@@ -84,29 +92,38 @@
                   :src="otherLinks"
                 ></b-embed>
               </div>
+              <p>{{ story4 }}</p>
+            </div>
 
-              <div class="container-fluid container-xl d-flex container col-md-12">
-                <form
-                  @submit.prevent="Writecomment(story_id)"
-                  class="container-fluid container-xl d-flex container col-md-12"
-                >
-                  <div class="col-md-12">
-                    <b-form-input v-model="comments" placeholder="Comment...">
-                    </b-form-input>
-                  </div>
+            <div>
+              <form
+                @submit.prevent="Writecomment(story_id)"
+                class="container-fluid container-xl d-flex container col-md-9"
+              >
+                <div class="col-md-12">
+                  <b-form-input
+                    v-model="comments"
+                    id="commentInput"
+                    placeholder="   Write a comment..."
+                  >
+                  </b-form-input>
+                </div>
 
-                  <div>
-                    <button type="submit" class="btn-floating btn-mini orange">
-                      <i class="ri-send-plane-2-fill"></i>
-                    </button>
-                  </div>
-                </form>
-              </div>
+                <div>
+                  <button
+                    style="margin: 2px"
+                    type="submit"
+                    class="btn-floating btn-mini orange"
+                  >
+                    <i class="ri-send-plane-2-fill"></i>
+                  </button>
+                </div>
+              </form>
             </div>
           </b-col>
 
           <!---Col No.2-->
-          <b-col md="5">
+          <b-col md="3">
             <div id="col2" class="container col-md-12">
               <h5>Trending</h5>
               <div v-for="story in stories" v-bind:key="story.id">
@@ -170,11 +187,20 @@ export default {
             (vm.story_id = doc.data().doc_ID),
               (vm.title = doc.data().title),
               (vm.story = doc.data().story),
+              (vm.story1 = doc.data().story1),
+              (vm.story2 = doc.data().story2),
+              (vm.story3 = doc.data().story3),
+              (vm.story4 = doc.data().story4),
               (vm.like = doc.data().like),
               (vm.comment = doc.data().comment),
               (vm.otherLinks = doc.data().otherLinks),
               (vm.time = doc.data().timestamp),
-              (vm.imageUrl = doc.data().image);
+              (vm.imageUrl = doc.data().image),
+              (vm.imageUrl1 = doc.data().image1),
+              (vm.imageUrl2 = doc.data().image2),
+              (vm.imageUrl3 = doc.data().image3),
+              (vm.subtitle = doc.data().subtitle),
+              (vm.imageUrl4 = doc.data().image4);
           });
         });
       });
@@ -314,28 +340,14 @@ export default {
           .catch((error) => console.error(error));
       }
     },
-    ShareBtn() {
-      let doc = encodeURI(document.location.href);
-
-      var shareFacebook = document.querySelector(".shares");
-
-      shareFacebook.setAttribute("href", `https://www.facebook.com/sharer.php?u=${doc}`);
-      console.log(shareFacebook);
-    },
   },
 };
 </script>
 
 <style scoped>
-p {
-  text-indent: 50px;
-  text-align: justify;
-  letter-spacing: 1px;
-}
-
 .flexbox-item {
   margin-top: 40px;
-  max-width: 300px;
+  max-width: 400px;
   width: 300px;
   justify-content: center;
 }
@@ -345,6 +357,14 @@ p {
     width: 100%;
     max-height: 40vh;
   }
+}
+#commentInput {
+  border: #f19124 1px solid;
+  border-radius: 4px;
+}
+#commentInput:hover {
+  border: #168e2a 1px solid;
+  border-radius: 4px;
 }
 #header-image {
   display: flex;
@@ -417,6 +437,19 @@ p {
   }
 }
 
+#imageViewStory1 {
+  display: flex;
+  width: 100%;
+  flex: 100%;
+}
+
+@media (max-width: 800px) {
+  #imageViewStory1 {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
 #viewstory {
   color: #808080;
 }
@@ -439,6 +472,11 @@ p {
   font-weight: 600;
   font-size: 16px;
 }
+#story-sub-title {
+  margin: 10px;
+  font-weight: 450;
+  font-size: 20px;
+}
 #story-view-title {
   margin: 10px;
   font-weight: 600;
@@ -446,7 +484,7 @@ p {
 }
 
 #story-view-story {
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: 300;
+  font-size: 17px;
 }
 </style>
