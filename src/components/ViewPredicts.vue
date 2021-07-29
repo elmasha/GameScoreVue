@@ -1,11 +1,61 @@
 <template>
-    <div id="viewpredicts">
-      <div class="col-md-12" align="center">
+  <div id="viewpredicts">
+    <div id="navlinks" class="container">
+      <p></p>
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="/"><img id="gamelogo" :src="logo" alt="" /></a>
+        </li>
+      </ul>
+
+      <ul class="nav justify-content-end">
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li> -->
+        <li>
+          <div id="selcetor" class="container-xl d-flex">
+            <v-select
+              v-model="cats"
+              placeholder="   Search..."
+              class="col-md-12"
+              :options="options"
+            ></v-select>
+
+            <i
+              @click="SearchCat(cats)"
+              style="margin: 9px"
+              class="ri-search-line col-md-1"
+            ></i>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="nav justify-content-rigt">
+        <li class="nav-item">
+          <a id="navlinks" class="nav-link" href="#">Livescore</a>
+        </li>
+        <li class="nav-item">
+          <a id="navlinks" class="nav-link" href="#">Predictions</a>
+        </li>
+        <li id="youtubeLink" class="nav-item">
+          <a
+            id="youtubeText"
+            class="nav-link"
+            href="https://www.youtube.com/channel/UCVVXonDa0QM4q6RSkUNG4ag"
+          >
+            <span id="yticon"
+              >Watch Live<i class="ri-youtube-fill" width="38px;" height="38px"></i
+            ></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-12" align="center">
       <div class="container">
         <img id="header-image" :src="header2" style="width: 100%" />
       </div>
     </div>
-
 
     <div class="col-md-12">
       <h3 id="story-view-title">{{ title }}</h3>
@@ -66,21 +116,25 @@
                 <div class="story-view-image col-md-9" align="center">
                   <img id="imageViewStory1" class="fluid" :src="imageUrl2" alt="" />
                 </div>
-                <a  :href="otherLinks" ><h4>{{ subheading1 }}</h4></a>
+                <a :href="otherLinks"
+                  ><h4>{{ subheading1 }}</h4></a
+                >
                 <p>{{ story1 }}</p>
-
-                 
 
                 <div class="story-view-image col-md-9" align="center">
                   <img id="imageViewStory1" class="fluid" :src="imageUrl3" alt="" />
                 </div>
-                <a  :href="otherLinks" ><h4>{{ subheading2 }}</h4></a>
+                <a :href="otherLinks"
+                  ><h4>{{ subheading2 }}</h4></a
+                >
                 <p>{{ story2 }}</p>
 
                 <div class="col-md-9" align="center">
                   <img id="imageViewStory1" class="fluid" :src="imageUrl4" alt="" />
                 </div>
-                <a  :href="otherLinks" ><h4>{{ subheading3 }}</h4></a>
+                <a :href="otherLinks"
+                  ><h4>{{ subheading3 }}</h4></a
+                >
                 <p>{{ story3 }}</p>
 
                 <p><a :href="otherLinks"></a></p>
@@ -145,14 +199,13 @@
         </b-row>
       </b-container>
     </div>
-        
-    </div>
+  </div>
 </template>
 <script>
 import db from "./firebaseInit";
 import moment from "moment";
 export default {
-      name: "viewpredict",
+  name: "viewpredict",
   data() {
     return {
       stories: [],
@@ -273,7 +326,6 @@ export default {
         });
     },
 
-    
     LikeCount: function () {
       var sfDocRef = db.collection("Predictions").doc(this.$route.params.predict_id);
 
@@ -306,7 +358,9 @@ export default {
           .then((docRef) => {
             console.log("Added id" + docRef.id);
 
-            var sfDocRef = db.collection("Predictions").doc(this.$route.params.predict_id);
+            var sfDocRef = db
+              .collection("Predictions")
+              .doc(this.$route.params.predict_id);
             db.runTransaction((transaction) => {
               return transaction.get(sfDocRef).then((sfDoc) => {
                 this.comment = sfDoc.data().comment + 1;
@@ -330,10 +384,9 @@ export default {
       }
     },
   },
-}
+};
 </script>
 <style scoped>
-
 .flexbox-item {
   margin-top: 40px;
   max-width: 400px;
@@ -476,5 +529,4 @@ export default {
   font-weight: 300;
   font-size: 17px;
 }
-    
 </style>

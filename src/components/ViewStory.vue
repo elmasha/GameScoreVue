@@ -1,21 +1,72 @@
 <template>
   <div id="viewstory">
+    <div id="navlinks" class="container">
+      <p></p>
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="/"><img id="gamelogo" :src="logo" alt="" /></a>
+        </li>
+      </ul>
+
+      <ul class="nav justify-content-end">
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li> -->
+        <li>
+          <div id="selcetor" class="container-xl d-flex">
+            <v-select
+              v-model="cats"
+              placeholder="   Search..."
+              class="col-md-12"
+              :options="options"
+            ></v-select>
+
+            <i
+              @click="SearchCat(cats)"
+              style="margin: 9px"
+              class="ri-search-line col-md-1"
+            ></i>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="nav justify-content-rigt">
+        <li class="nav-item">
+          <a id="navlinks" class="nav-link" href="#">Livescore</a>
+        </li>
+        <li class="nav-item">
+          <a id="navlinks" class="nav-link" href="#">Predictions</a>
+        </li>
+        <li id="youtubeLink" class="nav-item">
+          <a
+            id="youtubeText"
+            class="nav-link"
+            href="https://www.youtube.com/channel/UCVVXonDa0QM4q6RSkUNG4ag"
+          >
+            <span id="yticon"
+              >Watch Live<i class="ri-youtube-fill" width="38px;" height="38px"></i
+            ></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
     <div class="col-md-12" align="center">
       <div class="container">
         <img id="header-image" :src="header2" style="width: 100%" />
       </div>
     </div>
 
-
     <div class="col-md-12">
       <h3 id="story-view-title">{{ title }}</h3>
       <h5 id="story-sub-title">{{ subtitle }}</h5>
+      <div class="col-md-12 container-fluid d-flex">
+        <span id="time"
+          ><i class="ri-time-line"></i> {{ date.toDate() | formatDate }}</span
+        >
+      </div>
       <div class="story-view-image col-md-9" align="center">
         <img id="imageViewStory" class="fluid" :src="imageUrl" alt="" />
-      </div>
-
-      <div id="time">
-        <!-- <p>{{ timestamp }}</p> -->
       </div>
 
       <b-container class="row">
@@ -61,11 +112,17 @@
               <hr />
 
               <div class="col-md-12" id="story-view-story">
+                <a :href="otherLinks"
+                  ><h4>{{ subheading }}</h4></a
+                >
                 <p>{{ story }}</p>
 
                 <div class="story-view-image col-md-9" align="center">
                   <img id="imageViewStory1" class="fluid" :src="imageUrl2" alt="" />
                 </div>
+                <a :href="otherLinks"
+                  ><h4>{{ subheading1 }}</h4></a
+                >
 
                 <p>{{ story1 }}</p>
 
@@ -73,12 +130,18 @@
                   <img id="imageViewStory1" class="fluid" :src="imageUrl3" alt="" />
                 </div>
 
+                <a :href="otherLinks"
+                  ><h4>{{ subheading2 }}</h4></a
+                >
                 <p>{{ story2 }}</p>
 
                 <div class="col-md-9" align="center">
                   <img id="imageViewStory1" class="fluid" :src="imageUrl4" alt="" />
                 </div>
 
+                <a :href="otherLinks"
+                  ><h4>{{ subheading3 }}</h4></a
+                >
                 <p>{{ story3 }}</p>
 
                 <p><a :href="otherLinks"></a></p>
@@ -89,9 +152,13 @@
                   id="embedSource"
                   type="iframe"
                   aspect="250by150"
+                  style="width: 500px; height: 200px"
                   :src="otherLinks"
                 ></b-embed>
               </div>
+              <a :href="otherLinks"
+                ><h4>{{ subheading4 }}</h4></a
+              >
               <p>{{ story4 }}</p>
             </div>
 
@@ -148,13 +215,14 @@
 
 <script>
 import db from "./firebaseInit";
-import moment from "moment";
+import moment from "vue-moment";
 
 export default {
   name: "viewstory",
   data() {
     return {
       stories: [],
+      logo: require("@/assets/logo.png"),
       header2: require("@/assets/img/header2.jpg"),
       story_id: null,
       title: null,
@@ -164,6 +232,7 @@ export default {
       comments: null,
       otherLinks: null,
       comment: null,
+      date: null,
       time: null,
     };
   },
@@ -194,12 +263,16 @@ export default {
               (vm.like = doc.data().like),
               (vm.comment = doc.data().comment),
               (vm.otherLinks = doc.data().otherLinks),
-              (vm.time = doc.data().timestamp),
+              (vm.date = doc.data().timestamp),
               (vm.imageUrl = doc.data().image),
               (vm.imageUrl1 = doc.data().image1),
               (vm.imageUrl2 = doc.data().image2),
               (vm.imageUrl3 = doc.data().image3),
               (vm.subtitle = doc.data().subtitle),
+              (vm.subheading1 = doc.data().subheading1),
+              (vm.subheading2 = doc.data().subheading2),
+              (vm.subheading3 = doc.data().subheading3),
+              (vm.subheading4 = doc.data().subheading4),
               (vm.imageUrl4 = doc.data().image4);
           });
         });
@@ -238,6 +311,13 @@ export default {
   methods: {
     moment: function () {
       return moment();
+    },
+
+    // methods area
+    formatDate(dt) {
+      return moment(String(dt)).format("ddd, MMMM YYYY");
+
+      // you dont have to use fromNow() it's just an example
     },
     format_date(value) {
       if (value) {
@@ -280,7 +360,8 @@ export default {
               (this.comment = doc.data().comment),
               (this.otherLinks = doc.data().otherLinks),
               (this.time = doc.data().timestamp),
-              (this.imageUrl = doc.data().image);
+              (this.imageUrl = doc.data().image),
+              (this.date = doc.data().timestamp);
           });
           console.log("Story", this.title);
         });
@@ -357,6 +438,11 @@ export default {
     width: 100%;
     max-height: 40vh;
   }
+}
+#time {
+  color: black;
+  font-size: 19px;
+  font-weight: 400;
 }
 #commentInput {
   border: #f19124 1px solid;

@@ -17,13 +17,13 @@ import 'vue-select/dist/vue-select.css';
 import './assets/css/style.css'
 import 'vuesax/dist/vuesax.css'
 import ScrollBar from '@morioh/v-perfect-scrollbar'
+Vue.use(moment);
 
 //------Vue animate aos ----
 Vue.use(VueAos);
 
 
 
-Vue.use(moment);
 
 // global register
 Vue.use(ScrollBar);
@@ -35,7 +35,7 @@ Vue.use(BootstrapVue)
     // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
     ///Vue select
-Vue.component('v-select',VSelect)
+Vue.component('v-select', VSelect)
 Vue.component('b-navbar', BNavbar)
 
 
@@ -43,6 +43,11 @@ Vue.component('b-navbar', BNavbar)
 
 Vue.use(Vuetify)
 
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).format("DD-MMM-YYYY HH:mm")
+    }
+});
 
 
 

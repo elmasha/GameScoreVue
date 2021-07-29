@@ -20,6 +20,7 @@
     "v-video-embed": "^1.0.8",
     "vue": "^2.6.14",
     "vue-aos": "^2.1.0",
+    "vue-moment": "^4.1.0",
     "vue-router": "^3.5.2",
     "vue-select": "^3.11.2",
     "vue-share-buttons": "^1.1.0",
