@@ -60,6 +60,11 @@
     <div class="col-md-12">
       <h3 id="story-view-title">{{ title }}</h3>
       <h5 id="story-sub-title">{{ subtitle }}</h5>
+      <div class="col-md-12 container-fluid d-flex">
+        <span id="time"
+          ><i class="ri-time-line"></i> {{ date.toDate() | formatDate }}</span
+        >
+      </div>
       <div class="story-view-image col-md-9" align="center">
         <img id="imageViewStory" class="fluid" :src="imageUrl" alt="" />
       </div>
@@ -258,7 +263,8 @@ export default {
               (vm.subheading2 = doc.data().subheading2),
               (vm.subheading3 = doc.data().subheading3),
               (vm.subheading4 = doc.data().subheading5),
-              (vm.imageUrl4 = doc.data().image4);
+              (vm.imageUrl4 = doc.data().image4),
+              (vm.date = doc.data().timestamp);
           });
         });
       });
@@ -455,6 +461,12 @@ export default {
   padding: 0px 10px 0px 10px;
   border: #168e2a 2px solid;
   border-radius: 12px;
+}
+
+#time {
+  color: black;
+  font-size: 19px;
+  font-weight: 400;
 }
 
 #embedSource {

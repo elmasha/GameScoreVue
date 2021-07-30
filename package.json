@@ -1,5 +1,5 @@
 {
-  "name": "gamescorvueke",
+  "name": "gamescores",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -24,6 +24,7 @@
     "vue-router": "^3.5.2",
     "vue-select": "^3.11.2",
     "vue-share-buttons": "^1.1.0",
+    "vue2-perfect-scrollbar": "^1.5.0",
     "vuefire": "^2.2.5",
     "vuesax": "^3.12.2",
     "vuetify": "^2.5.7"

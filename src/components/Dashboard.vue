@@ -71,48 +71,50 @@
               <!--Fecth Div-->
 
               <div class="row" id="fetch">
-                <div class="with-header flexbox-container">
-                  <div v-for="(story, id) in stories" v-bind:key="id" class="col-md-4">
-                    <router-link
-                      v-bind:to="{
-                        name: 'viewstory',
-                        params: { story_id: story.id },
-                      }"
-                    >
-                      <b-card-group>
-                        <b-card
-                          id="CardView"
-                          :header="story.timestamp"
-                          :img-src="story.image"
-                          img-top
-                          tag="article"
-                          style="max-height: 100rem"
-                          :footer="story.Category"
-                          class="flexbox-item col-md-12"
-                        >
-                          <b-card-text>
-                            <h5>{{ story.Title }}</h5>
-                          </b-card-text>
-                          <div id="story-head" class="story-title text-center">
-                            <div class="container-fluid container-xl d-flex">
-                              <div id="commentSect">
-                                <i id="showUS" class="ri-heart-3-fill">
-                                  {{ story.Like }}</i
-                                >
-                              </div>
+                <perfect-scrollbar>
+                  <div class="with-header flexbox-container">
+                    <div v-for="(story, id) in stories" v-bind:key="id" class="col-md-4">
+                      <router-link
+                        v-bind:to="{
+                          name: 'viewstory',
+                          params: { story_id: story.id },
+                        }"
+                      >
+                        <b-card-group>
+                          <b-card
+                            id="CardView"
+                            :header="story.timestamp"
+                            :img-src="story.image"
+                            img-top
+                            tag="article"
+                            style="max-height: 100rem"
+                            :footer="story.Category"
+                            class="flexbox-item col-md-12"
+                          >
+                            <b-card-text>
+                              <h5>{{ story.Title }}</h5>
+                            </b-card-text>
+                            <div id="story-head" class="story-title text-center">
+                              <div class="container-fluid container-xl d-flex">
+                                <div id="commentSect">
+                                  <i id="showUS" class="ri-heart-3-fill">
+                                    {{ story.Like }}</i
+                                  >
+                                </div>
 
-                              <div id="commentSect">
-                                <i id="showUS" class="ri-chat-3-fill">
-                                  {{ story.Comment }}
-                                </i>
+                                <div id="commentSect">
+                                  <i id="showUS" class="ri-chat-3-fill">
+                                    {{ story.Comment }}
+                                  </i>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </b-card>
-                      </b-card-group>
-                    </router-link>
+                          </b-card>
+                        </b-card-group>
+                      </router-link>
+                    </div>
                   </div>
-                </div>
+                </perfect-scrollbar>
               </div>
             </b-col>
 
@@ -122,38 +124,39 @@
 
               <div class="">
                 <div class="row">
-                  <div class="d-flex flexbox-container">
-                    <div
-                      v-for="(predict, id2) in predictions"
-                      v-bind:key="id2"
-                      class="col-md-3"
-                    >
-                   
-                      <router-link
-                        v-bind:to="{
-                          name: 'viewpredicts',
-                          params: { predict_id: predict.id2 },
-                        }"
+                  <perfect-scrollbar>
+                    <div class="d-flex flexbox-container">
+                      <div
+                        v-for="(predict, id2) in predictions"
+                        v-bind:key="id2"
+                        class="col-md-3"
                       >
-                        <b-card-group>
-                          <b-card
-                            id="PredictCard"
-                            :header="predict.Category2"
-                            :img-src="predict.image2"
-                            img-top
-                            tag="article"
-                            style="max-height: 100rem"
-                            class="flexbox-item d-flex col-md-12"
-                          >
-                            <b-card-text>
-                              <h5>{{ predict.Title2 }}</h5>
-                            </b-card-text>
-                            <div id="story-head" class="story-title text-center"></div>
-                          </b-card>
-                        </b-card-group>
-                      </router-link>
+                        <router-link
+                          v-bind:to="{
+                            name: 'viewpredicts',
+                            params: { predict_id: predict.id2 },
+                          }"
+                        >
+                          <b-card-group>
+                            <b-card
+                              id="PredictCard"
+                              :header="predict.Category2"
+                              :img-src="predict.image2"
+                              img-top
+                              tag="article"
+                              style="max-height: 100rem"
+                              class="flexbox-item d-flex col-md-12"
+                            >
+                              <b-card-text>
+                                <h5>{{ predict.Title2 }}</h5>
+                              </b-card-text>
+                              <div id="story-head" class="story-title text-center"></div>
+                            </b-card>
+                          </b-card-group>
+                        </router-link>
+                      </div>
                     </div>
-                  </div>
+                  </perfect-scrollbar>
                 </div>
               </div>
             </b-col>
@@ -351,6 +354,9 @@ a {
 }
 #gamelogo {
   width: 25%;
+}
+.ps {
+  height: 700px;
 }
 
 @media (max-width: 350px) {

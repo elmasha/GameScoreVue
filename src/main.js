@@ -22,7 +22,10 @@ Vue.use(moment);
 //------Vue animate aos ----
 Vue.use(VueAos);
 
-
+import PerfectScrollbar from 'vue2-perfect-scrollbar'
+import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
+ 
+Vue.use(PerfectScrollbar)
 
 
 // global register
