@@ -43,9 +43,7 @@
             class="nav-link"
             href="https://www.youtube.com/channel/UCVVXonDa0QM4q6RSkUNG4ag"
           >
-            <span id="yticon"
-              >Watch Live<i class="ri-youtube-fill" width="38px;" height="38px"></i
-            ></span>
+            <span id="yticon">Watch Live<i class="ri-youtube-fill"></i></span>
           </a>
         </li>
       </ul>
@@ -160,11 +158,35 @@
                 </div>
               </div>
             </b-col>
+
+            <b-col cols="12" md="12">
+              <h4></h4>
+
+              <div class="result-list">
+                <article
+                  v-for="(article, index) in articles"
+                  :key="index"
+                  @click="navTo(article.url)"
+                >
+                  <header>
+                    <img v-if="article.urlToImage" :src="article.urlToImage" alt="" />
+                    <i v-else class="fas fa-image"></i>
+                  </header>
+                  <section v-html="article.title"></section>
+                  <footer>
+                    <i class="fas fa-chevron-right"></i>
+                  </footer>
+                </article>
+              </div>
+              <div ref="infinitescrolltrigger" id="scroll-trigger">
+                <i v-if="showloader" class="fas fa-spinner fa-spin"></i>
+              </div>
+            </b-col>
           </b-row>
-          <div class="elfsight-app-d4e75d53-2caf-418d-9b3e-76a3c4fe7740"></div>
         </b-container>
 
         <!--<div class="fixed-action-btn">
+        <div class="elfsight-app-d4e75d53-2caf-418d-9b3e-76a3c4fe7740"></div>
           <a href="" class="btn-floating btn-large green">
             <i class="ri-refresh-line"></i>
           </a>
@@ -180,6 +202,8 @@ import db2 from "./firebaseInit";
 //import firebase from "firebase";
 export default {
   name: "dashboard",
+  props: ["apiKey"],
+
   data() {
     return {
       timestamp: "",
@@ -192,25 +216,38 @@ export default {
       predictions: [],
       category: "",
       cats: null,
-      options: ["Football", "Boxing", "Rugby", "Hockey", "Tennis"],
+      options: ["Football", "Boxing", "Rugby", "Hockey", "Tennis", "Golf", "VolleyBall"],
       select2: [],
+      apiUrl: "",
+      isBusy: false,
+      showloader: false,
+      currentPage: 1,
+      totalResults: 0,
+      maxPerPage: 20,
+      searchword: "",
+      articles: [],
+      country: "ke",
     };
   },
   created() {
     this.FetchData;
     this.FetchPredictions;
+    this.fetchTopNews();
   },
-  computed() {
-    this.FetchData;
-    this.FetchPredictions;
+  computed: {
+    pageCount() {
+      return Math.ceil(this.totalResults / this.maxPerPage);
+    },
   },
   mounted() {
+    this.scrollTrigger();
     //const  startfulldate = new Date();
     let start = new Date("2020-01-01");
     //var currentTime = firebase.firestore.Timestamp.fromDate(new Date(804800000));
     //var searchDate = new Date(currentTime);
     db.collection("Stories")
       .where("timestamp", ">", start)
+      .orderBy("timestamp", "desc")
       .get()
       .then((queryResult) => {
         queryResult.forEach((doc) => {
@@ -248,6 +285,73 @@ export default {
       });
   },
   methods: {
+    navTo(url) {
+      window.open(url);
+    },
+    resetData() {
+      this.currentPage = 1;
+      this.articles = [];
+    },
+    fetchSearchNews() {
+      if (this.searchword !== "") {
+        this.apiUrl =
+          "https://newsapi.org/v2/everything?q=" +
+          this.searchword +
+          "&pageSize=" +
+          this.maxPerPage +
+          "&apiKey=" +
+          this.apiKey;
+        this.isBusy = true;
+        this.resetData();
+        this.fetchData();
+      } else {
+        this.fetchTopNews();
+      }
+    },
+    fetchTopNews() {
+      this.apiUrl =
+        "https://newsapi.org/v2/top-headlines?country=" +
+        this.country +
+        "&pageSize=" +
+        this.maxPerPage +
+        "&apiKey=" +
+        this.apiKey;
+      this.isBusy = true;
+      this.searchword = "";
+
+      this.resetData();
+      this.fetchData();
+    },
+
+    fetchData() {
+      let req = new Request(this.apiUrl + "&page=" + this.currentPage);
+      fetch(req)
+        .then((resp) => resp.json())
+        .then((data) => {
+          this.totalResults = data.totalResults;
+          data.articles.forEach((element) => {
+            this.articles.push(element);
+          });
+          this.isBusy = false;
+          this.showloader = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    scrollTrigger() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio > 0 && this.currentPage < this.pageCount) {
+            this.showloader = true;
+            this.currentPage += 1;
+            this.fetchData();
+          }
+        });
+      });
+      observer.observe(this.$refs.infinitescrolltrigger);
+    },
     onSlideStart: function (slide) {
       console.log(slide);
       this.sliding = true;
@@ -301,9 +405,9 @@ export default {
     },
     FetchData() {
       //  var currentTime = firebase.firestore.Timestamp.fromDate(new Date(804800000));
-      let start = new Date("2021-01-01");
+      let start = new Date("2017-01-01");
       db.collection("Stories")
-        .where("timestamp", ">", start)
+        .where("timestamp", "<", start)
         .get()
         .then((queryResult) => {
           queryResult.forEach((doc) => {
@@ -326,9 +430,31 @@ export default {
 </script>
 
 <style>
+article {
+  display: grid;
+  grid-template-columns: 200px auto 40px;
+  grid-template-rows: 100px;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+  cursor: pointer;
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+i {
+  font-size: 2rem;
+}
 #yticon {
-  margin: 5px;
-  margin-bottom: 20px;
+  margin: 3px;
+  margin-bottom: 10px;
 }
 #youtubeLink {
   background: rgb(245, 3, 3);
@@ -356,7 +482,7 @@ a {
   width: 25%;
 }
 .ps {
-  height: 700px;
+  height: 800px;
 }
 
 @media (max-width: 350px) {
@@ -445,7 +571,7 @@ a {
 #mynav {
   color: #f19124;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   margin: 6px;
 }
 #mynav:hover {
@@ -551,7 +677,7 @@ h4:hover {
   font-weight: 400;
 }
 #fetch {
-  background: rgb(243, 243, 243);
+  background: rgba(243, 243, 243, 0.598);
   border-radius: 6px;
   padding: 10px;
 }

@@ -72,7 +72,7 @@
       <b-container class="row">
         <b-row>
           <!---Col No.1-->
-          <b-col md="9">
+          <b-col md="8">
             <div class="col-md-12">
               <div class="col-md-12 container-fluid d-flex">
                 <div id="commentSect" v-on: @click="LikeCount()">
@@ -97,18 +97,6 @@
                 ></span>
               </div>
 
-              <!--<div id="socialmedia" class="col-md-12 container-fluid d-flex">
-                <i
-                  id="shares"
-                  @click.prevent="ShareBtn"
-                  class="shares ri-facebook-circle-fill btn-floating btn-small indigo"
-                ></i>
-                <i id="shares" class="ri-twitter-line btn-floating btn-small blue"></i>
-                <i id="shares" class="ri-instagram-line btn-floating btn-small red"></i>
-
-                <div class="addthis_inline_share_toolbox"></div>
-              </div>  -->
-              <div class="elfsight-app-d4e75d53-2caf-418d-9b3e-76a3c4fe7740"></div>
               <hr />
 
               <div class="col-md-12" id="story-view-story">
@@ -190,7 +178,7 @@
           </b-col>
 
           <!---Col No.2-->
-          <b-col md="3">
+          <b-col md="4">
             <div id="col2" class="container col-md-12">
               <h5>Trending</h5>
               <div v-for="story in stories" v-bind:key="story.id">
@@ -201,6 +189,7 @@
                   class="flexbox-item col-md-12"
                   style="max-width: 300rem"
                   :header="story.Title"
+                  :footer="story.Category"
                 >
                   <!-- list group -->
                 </b-card>
@@ -279,7 +268,13 @@ export default {
       });
   },
   mounted() {
+    let start = new Date("2020-01-01");
+    //var currentTime = firebase.firestore.Timestamp.fromDate(new Date(804800000));
+    //var searchDate = new Date(currentTime);
     db.collection("Stories")
+      .where("timestamp", ">", start)
+      .orderBy("timestamp", "desc")
+      .limit(3)
       .get()
       .then((queryResult) => {
         queryResult.forEach((doc) => {

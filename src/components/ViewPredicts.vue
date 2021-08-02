@@ -76,7 +76,7 @@
       <b-container class="row">
         <b-row>
           <!---Col No.1-->
-          <b-col md="9">
+          <b-col md="8">
             <div class="col-md-12">
               <div class="col-md-12 container-fluid d-flex">
                 <div id="commentSect" v-on: @click="LikeCount()">
@@ -112,7 +112,6 @@
 
                 <div class="addthis_inline_share_toolbox"></div>
               </div>  -->
-              <div class="elfsight-app-d4e75d53-2caf-418d-9b3e-76a3c4fe7740"></div>
               <hr />
 
               <div class="col-md-12" id="story-view-story">
@@ -184,7 +183,7 @@
           </b-col>
 
           <!---Col No.2-->
-          <b-col md="3">
+          <b-col md="4">
             <div id="col2" class="container col-md-12">
               <h5>Trending</h5>
               <div v-for="story in stories" v-bind:key="story.id">

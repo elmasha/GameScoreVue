@@ -27,6 +27,9 @@ import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
  
 Vue.use(PerfectScrollbar)
 
+import VueSocialSharing from 'vue-social-sharing'
+Vue.use(VueSocialSharing);
+
 
 // global register
 Vue.use(ScrollBar);
