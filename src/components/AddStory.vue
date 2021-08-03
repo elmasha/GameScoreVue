@@ -185,8 +185,18 @@
           <input
             type="text"
             v-model="storylink"
-            placeholder="Story sourcs"
+            placeholder="Sub-heading link"
             id="storylink"
+          />
+        </div>
+
+        <div class="row form-group cols-9 md-9">
+          <label id="label" for="storylink">Story source link</label>
+          <input
+            type="text"
+            v-model="instagram_embed"
+            placeholder="instagram embed"
+            id="instagram"
           />
         </div>
 
@@ -194,9 +204,9 @@
           <label id="label" for="">Social media link</label>
           <input
             type="text"
-            v-model="medialink"
-            placeholder="Social medis links"
-            id="medialink"
+            v-model="twitter_embed"
+            placeholder="Twitter embed"
+            id="twitter"
           />
         </div>
 
@@ -231,6 +241,8 @@ export default {
       subheading4: null,
       medialink: null,
       storylink: null,
+      twitter_embed: null,
+      instagram_embed: null,
       picture: null,
       imageData: null,
       imageData2: null,
@@ -361,9 +373,9 @@ export default {
                   subheading3: this.subheading3,
                   subheading4: this.subheading4,
                   category: this.category,
-                  instagramLink: this.medialink,
-                  twitterLink: this.medialink,
-                  otherLinks: this.medialink,
+                  instagramLink: this.instagram_embed,
+                  twitterLink: this.twitter_embed,
+                  otherLinks: this.storylink,
                   comment: 0,
                   like: 0,
                   image: url,
@@ -383,6 +395,7 @@ export default {
       }
     },
   },
+  components: {},
 };
 </script>
 

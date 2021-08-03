@@ -30,6 +30,14 @@ Vue.use(PerfectScrollbar)
 import VueSocialSharing from 'vue-social-sharing'
 Vue.use(VueSocialSharing);
 
+import { Tweet } from 'vue-tweet-embed'
+Vue.use(Tweet)
+
+import InstagramEmbed from 'vue-instagram-embed';
+Vue.use(InstagramEmbed)
+
+import TwitterFeed from "vuejs-twitter-feed";
+Vue.use(TwitterFeed);
 
 // global register
 Vue.use(ScrollBar);

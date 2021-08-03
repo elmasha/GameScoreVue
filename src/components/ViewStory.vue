@@ -135,19 +135,18 @@
                 <p><a :href="otherLinks"></a></p>
               </div>
 
-              <div>
-                <b-embed
-                  id="embedSource"
-                  type="iframe"
-                  aspect="250by150"
-                  style="width: 500px; height: 200px"
-                  :src="otherLinks"
-                ></b-embed>
-              </div>
+              <instagram-embed
+                url="https://www.instagram.com/p/Bs_yHwHBjKo/"
+                max-width="500"
+              ></instagram-embed>
+              <div></div>
               <a :href="otherLinks"
                 ><h4>{{ subheading4 }}</h4></a
               >
               <p>{{ story4 }}</p>
+            </div>
+            <div>
+              <TwitterFeed :src="twitterLink"></TwitterFeed>
             </div>
 
             <div>
@@ -205,6 +204,7 @@
 <script>
 import db from "./firebaseInit";
 import moment from "vue-moment";
+import InstagramEmbed from "vue-instagram-embed";
 
 export default {
   name: "viewstory",
@@ -220,6 +220,7 @@ export default {
       imageUrl: null,
       comments: null,
       otherLinks: null,
+      twitterLink: null,
       comment: null,
       date: null,
       time: null,
@@ -229,6 +230,10 @@ export default {
     this.fetchData;
     this.FetchData;
     this.ShareBtn;
+
+    let ckeditor = document.getElementById("embed").createElement("script");
+    ckeditor.setAttribute("src", this.otherLinks);
+    document.head.appendChild(ckeditor);
   },
   computed: {
     timestamp: function () {
@@ -252,6 +257,8 @@ export default {
               (vm.like = doc.data().like),
               (vm.comment = doc.data().comment),
               (vm.otherLinks = doc.data().otherLinks),
+              (vm.twitterLink = doc.data().twitterLink),
+              (vm.instagramLink = doc.data().instagramLink),
               (vm.date = doc.data().timestamp),
               (vm.imageUrl = doc.data().image),
               (vm.imageUrl1 = doc.data().image1),
@@ -416,6 +423,9 @@ export default {
           .catch((error) => console.error(error));
       }
     },
+  },
+  components: {
+    InstagramEmbed,
   },
 };
 </script>
