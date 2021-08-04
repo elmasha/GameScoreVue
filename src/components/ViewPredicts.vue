@@ -223,7 +223,7 @@
           <!---Col No.2-->
           <b-col md="4">
             <div id="col2" class="container col-md-12">
-              <h5>Trending</h5>
+              <h6>Trending</h6>
               <div v-for="story in stories" v-bind:key="story.id">
                 <b-card
                   id="Cardview"
@@ -231,8 +231,9 @@
                   tag="article"
                   class="flexbox-item col-md-12"
                   style="max-width: 300rem"
-                  :header="story.Title"
-                >
+                ><b-card-text>
+                <span>{{story.Title}}</span>
+                </b-card-text>
                   <!-- list group -->
                 </b-card>
               </div>
@@ -307,7 +308,12 @@ export default {
       });
   },
   mounted() {
+    let start = new Date("2020-01-01");
+
     db.collection("Stories")
+    .where("timestamp", ">", start)
+      .orderBy("timestamp", "desc")
+      .limit(5)
       .get()
       .then((queryResult) => {
         queryResult.forEach((doc) => {

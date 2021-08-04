@@ -206,6 +206,27 @@
               <TwitterFeed :src="twitterLink"></TwitterFeed>
             </div>
 
+            <Tweet
+    tweet-id="1370027087818461184"
+    cards="visible"
+    conversation="all"
+    lang="en"
+    theme="light"
+    align="left"
+    :width="400"
+    :dnt="false"
+    @tweet-load-error="onTweetLoadError"
+    @tweet-load-success="onTweetLoadSuccess"
+  >
+    <template v-slot:loading>
+      <span>Loading...</span>
+    </template>
+
+    <template v-slot:error>
+      <span>Sorry, that tweet doesn’t exist!</span>
+    </template>
+  </Tweet>
+
             <div>
               <form
                 @submit.prevent="Writecomment(story_id)"
@@ -236,17 +257,17 @@
           <!---Col No.2-->
           <b-col md="4">
             <div id="col2" class="container col-md-12">
-              <h5>Trending</h5>
+              <h6>Trending</h6>
               <div v-for="story in stories" v-bind:key="story.id">
                 <b-card
                   id="Cardview"
                   align="left"
                   tag="article"
                   class="flexbox-item col-md-12"
-                  style="max-width: 300rem"
-                  :header="story.Title"
-                  :footer="story.Category"
-                >
+                  style="max-width: 500rem"
+                ><b-card-text>
+                <span>{{story.Title}}</span>
+                </b-card-text>
                   <!-- list group -->
                 </b-card>
               </div>

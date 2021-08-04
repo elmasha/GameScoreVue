@@ -8,6 +8,8 @@ import moment from 'moment'
 import VSelect from '@alfsnd/vue-bootstrap-select'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import Tweet from 'vue-tweet'
+Vue.use(Tweet)
 
 
 
@@ -30,8 +32,7 @@ Vue.use(PerfectScrollbar)
 import VueSocialSharing from 'vue-social-sharing'
 Vue.use(VueSocialSharing)
 
-import { Tweet } from 'vue-tweet-embed'
-Vue.use(Tweet)
+
 
 import InstagramEmbed from 'vue-instagram-embed';
 Vue.use(InstagramEmbed)
