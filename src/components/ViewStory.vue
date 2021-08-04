@@ -74,7 +74,7 @@
           <!---Col No.1-->
           <b-col md="8">
             <div class="col-md-12">
-              <div class="col-md-12 container-fluid d-flex">
+              <div class="col-md-9 container-fluid d-flex">
                 <div id="commentSect" v-on: @click="LikeCount()">
                   <span>
                     <i id="showUS" class="ri-heart-3-fill"> {{ like }} </i></span
@@ -86,15 +86,64 @@
                     <i id="showUS" class="ri-chat-3-fill"> {{ comment }} </i></span
                   >
                 </div>
+              </div>
+              <div class="col-md-12">
+                <div id="shareOn" class="row">
+                  <div class="col-md-9 container-fluid d-flex">
+                    <h6>Share</h6>
+                    <div id="commentSect">
+                      <ShareNetwork
+                        id="facebook"
+                        class="btn-floating btn-normal"
+                        network="facebook"
+                        :media="imageUrl"
+                        url="https://gamescores.co.ke/"
+                        :title="imageUrl"
+                        :description="story_id"
+                        :quote="title"
+                        ><i class="ri-facebook-circle-fill"></i>
+                      </ShareNetwork>
+                    </div>
 
-                <span
-                  id="showUS"
-                  class="iconify"
-                  data-icon="ci:share"
-                  data-inline="false"
-                  data-width="30"
-                  data-height="30"
-                ></span>
+                    <div id="commentSect">
+                      <ShareNetwork
+                        id="whatsapp"
+                        class="btn-floating btn-normal"
+                        network="whatsapp"
+                        :media="imageUrl"
+                        url="https://gamescores.co.ke/"
+                        :title="imageUrl"
+                        :description="story_id"
+                        :quote="title"
+                        ><i class="ri-whatsapp-line"></i>
+                      </ShareNetwork>
+                    </div>
+
+                    <div id="commentSect">
+                      <ShareNetwork
+                        id="twitter"
+                        class="btn-floating btn-normal"
+                        network="twitter"
+                        :media="imageUrl"
+                        :title="title"
+                        url="https://gamescores.co.ke/"
+                        :quote="title"
+                        ><i class="ri-twitter-line"></i>
+                      </ShareNetwork>
+                    </div>
+
+                    <div id="commentSect">
+                      <ShareNetwork
+                        id="messenger"
+                        class="btn-floating btn-normal"
+                        network="messenger"
+                        :media="imageUrl"
+                        url="https://gamescores.co.ke/:"
+                        ><i class="ri-messenger-line"></i>
+                      </ShareNetwork>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <hr />
@@ -144,6 +193,14 @@
                 ><h4>{{ subheading4 }}</h4></a
               >
               <p>{{ story4 }}</p>
+            </div>
+            <div>
+              <b-embed
+                id="embedSource"
+                type="iframe"
+                aspect="500by250"
+                :src="youTubeLink"
+              ></b-embed>
             </div>
             <div>
               <TwitterFeed :src="twitterLink"></TwitterFeed>
@@ -265,6 +322,7 @@ export default {
               (vm.imageUrl2 = doc.data().image2),
               (vm.imageUrl3 = doc.data().image3),
               (vm.subtitle = doc.data().subtitle),
+              (vm.youTubeLink = doc.data().youtubeLink),
               (vm.subheading1 = doc.data().subheading1),
               (vm.subheading2 = doc.data().subheading2),
               (vm.subheading3 = doc.data().subheading3),
@@ -444,6 +502,22 @@ export default {
     max-height: 40vh;
   }
 }
+
+#shareOn {
+  margin: 2px;
+}
+#facebook {
+  background-color: #1877f2;
+}
+#whatsapp {
+  background-color: #25d366;
+}
+#twitter {
+  background-color: #1da1f2;
+}
+#messenger {
+  background-color: #3b5998;
+}
 #time {
   color: black;
   font-size: 19px;
@@ -548,7 +622,7 @@ export default {
 #commentSect {
   color: #f19124;
   font-weight: 600;
-  margin-top: 20px;
+  margin: 2px;
   font-size: 16px;
 }
 #showUS {

@@ -201,6 +201,16 @@
         </div>
 
         <div class="row form-group cols-9 md-9">
+          <label id="label" for="">Youtube link</label>
+          <input
+            type="text"
+            v-model="youtube_embed"
+            placeholder="Youtube embed"
+            id="youtube"
+          />
+        </div>
+
+        <div class="row form-group cols-9 md-9">
           <label id="label" for="">Social media link</label>
           <input
             type="text"
@@ -242,6 +252,7 @@ export default {
       medialink: null,
       storylink: null,
       twitter_embed: null,
+      youtube_embed: null,
       instagram_embed: null,
       picture: null,
       imageData: null,
@@ -376,6 +387,7 @@ export default {
                   instagramLink: this.instagram_embed,
                   twitterLink: this.twitter_embed,
                   otherLinks: this.storylink,
+                  youtubeLink: this.youtube_embed,
                   comment: 0,
                   like: 0,
                   image: url,

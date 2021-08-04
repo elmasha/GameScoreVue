@@ -90,28 +90,66 @@
                     <i id="showUS" class="ri-chat-3-fill"> {{ comment }} </i></span
                   >
                 </div>
-
-                <span
-                  id="showUS"
-                  class="iconify"
-                  data-icon="ci:share"
-                  data-inline="false"
-                  data-width="30"
-                  data-height="30"
-                ></span>
               </div>
 
-              <!--<div id="socialmedia" class="col-md-12 container-fluid d-flex">
-                <i
-                  id="shares"
-                  @click.prevent="ShareBtn"
-                  class="shares ri-facebook-circle-fill btn-floating btn-small indigo"
-                ></i>
-                <i id="shares" class="ri-twitter-line btn-floating btn-small blue"></i>
-                <i id="shares" class="ri-instagram-line btn-floating btn-small red"></i>
+              <div class="col-md-12">
+                <div id="shareOn" class="row">
+                  <div class="col-md-9 container-fluid d-flex">
+                    <h6>Share</h6>
+                    <div id="commentSect">
+                      <ShareNetwork
+                        id="facebook"
+                        class="btn-floating btn-normal"
+                        network="facebook"
+                        :media="imageUrl"
+                        url="https://gamescores.co.ke/"
+                        :title="imageUrl"
+                        :description="story_id"
+                        :quote="title"
+                        ><i class="ri-facebook-circle-fill"></i>
+                      </ShareNetwork>
+                    </div>
 
-                <div class="addthis_inline_share_toolbox"></div>
-              </div>  -->
+                    <div id="commentSect">
+                      <ShareNetwork
+                        id="whatsapp"
+                        class="btn-floating btn-normal"
+                        network="whatsapp"
+                        :media="imageUrl"
+                        url="https://gamescores.co.ke/"
+                        :title="imageUrl"
+                        :description="story_id"
+                        :quote="title"
+                        ><i class="ri-whatsapp-line"></i>
+                      </ShareNetwork>
+                    </div>
+
+                    <div id="commentSect">
+                      <ShareNetwork
+                        id="twitter"
+                        class="btn-floating btn-normal"
+                        network="twitter"
+                        :media="imageUrl"
+                        :title="title"
+                        url="https://gamescores.co.ke/"
+                        :quote="title"
+                        ><i class="ri-twitter-line"></i>
+                      </ShareNetwork>
+                    </div>
+
+                    <div id="commentSect">
+                      <ShareNetwork
+                        id="messenger"
+                        class="btn-floating btn-normal"
+                        network="messenger"
+                        :media="imageUrl"
+                        url="https://gamescores.co.ke/:"
+                        ><i class="ri-messenger-line"></i>
+                      </ShareNetwork>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <hr />
 
               <div class="col-md-12" id="story-view-story">
@@ -148,7 +186,7 @@
                 <b-embed
                   id="embedSource"
                   type="iframe"
-                  aspect="250by150"
+                  aspect="500by250"
                   :src="otherLinks"
                 ></b-embed>
               </div>
@@ -467,7 +505,21 @@ export default {
   font-size: 19px;
   font-weight: 400;
 }
-
+#shareOn {
+  margin: 2px;
+}
+#facebook {
+  background-color: #1877f2;
+}
+#whatsapp {
+  background-color: #25d366;
+}
+#twitter {
+  background-color: #1da1f2;
+}
+#messenger {
+  background-color: #3b5998;
+}
 #embedSource {
   flex: 50%;
   justify-content: center;
@@ -510,7 +562,7 @@ export default {
 #commentSect {
   color: #f19124;
   font-weight: 600;
-  margin-top: 20px;
+  margin: 2px;
   font-size: 16px;
 }
 #showUS {

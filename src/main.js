@@ -28,7 +28,7 @@ import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 Vue.use(PerfectScrollbar)
 
 import VueSocialSharing from 'vue-social-sharing'
-Vue.use(VueSocialSharing);
+Vue.use(VueSocialSharing)
 
 import { Tweet } from 'vue-tweet-embed'
 Vue.use(Tweet)
