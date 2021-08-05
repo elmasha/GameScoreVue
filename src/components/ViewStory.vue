@@ -98,7 +98,7 @@
                         network="facebook"
                         :media="imageUrl"
                         url="https://gamescores.co.ke/"
-                        :title="imageUrl"
+                        :title="title"
                         :description="story_id"
                         :quote="title"
                         ><i class="ri-facebook-circle-fill"></i>
@@ -112,7 +112,7 @@
                         network="whatsapp"
                         :media="imageUrl"
                         url="https://gamescores.co.ke/"
-                        :title="imageUrl"
+                        :title="title"
                         :description="story_id"
                         :quote="title"
                         ><i class="ri-whatsapp-line"></i>
@@ -198,12 +198,12 @@
               <b-embed
                 id="embedSource"
                 type="iframe"
-                aspect="500by250"
+                aspect="500by300"
                 :src="youTubeLink"
               ></b-embed>
             </div>
             <div>
-              <TwitterFeed :src="twitterLink"></TwitterFeed>
+              <TwitterFeed :src="twitterLink" height="70vh"></TwitterFeed>
             </div>
 
             <div>
@@ -245,7 +245,6 @@
                   class="flexbox-item col-md-12"
                   style="max-width: 300rem"
                   :header="story.Title"
-                  :footer="story.Category"
                 >
                   <!-- list group -->
                 </b-card>
