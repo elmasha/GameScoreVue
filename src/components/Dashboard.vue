@@ -85,7 +85,8 @@
                             :img-src="story.image"
                             img-top
                             tag="article"
-                            style="max-height: 100rem"
+                            width="400px"
+                            height="70vh"
                             :footer="story.Category"
                             class="flexbox-item col-md-12"
                           >
@@ -576,7 +577,7 @@ a {
   }
 }
 #newsSection {
-  margin-top: 60px;
+  margin-top: 10px;
 }
 #mynav {
   color: #f19124;

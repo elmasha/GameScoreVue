@@ -1,6 +1,41 @@
 <template>
   <div id="addstroy">
     <h2>DashBoard</h2>
+    <div class="row text-center">
+      <div
+        class="container container-xl d-flex container col-md-12 justify-content-between"
+      >
+        <div md="12" xs="12">
+          <span
+            >Stories <br /><strong>{{ storyCount }}</strong>
+          </span>
+        </div>
+        <div md="2">
+          <span
+            >Predictions <br /><strong>{{ predictCount }}</strong></span
+          >
+        </div>
+
+        <div md="2">
+          <span
+            >Published <br /><strong>{{ publishCount }}</strong></span
+          >
+        </div>
+
+        <div md="2">
+          <span
+            >Trash <br /><strong>{{ trash }}</strong></span
+          >
+        </div>
+
+        <div md="2">
+          <span
+            >Draft <br /><strong>{{ draftCount }}</strong></span
+          >
+        </div>
+      </div>
+    </div>
+
     <b-container class="row">
       <b-row></b-row>
       <!---Col No.1-->
@@ -300,6 +335,11 @@ export default {
   name: "addstroy",
   data() {
     return {
+      storyCount: 0,
+      predictCount: 0,
+      trash: 0,
+      draftCount: 0,
+      publishCount: 0,
       stories: [],
       predictions: [],
       type: null,
@@ -342,7 +382,6 @@ export default {
       .get()
       .then((queryResult) => {
         queryResult.forEach((doc) => {
-          console.log("Stories", doc.data());
           const data = {
             id: doc.id,
             Title: doc.data().title,
@@ -360,7 +399,6 @@ export default {
       .get()
       .then((queryResult6) => {
         queryResult6.forEach((doc) => {
-          console.log("Predictions", doc.data());
           const data4 = {
             id2: doc.id,
             Title: doc.data().title,
@@ -372,6 +410,18 @@ export default {
           };
           this.predictions.push(data4);
         });
+      });
+
+    db.collection("Admin")
+      .doc("gamescores")
+      .get()
+      .then((doc) => {
+        (this.storyCount = doc.data().StoryCount),
+          (this.predictCount = doc.data().PredictCount),
+          (this.draftCount = doc.data().DraftCount),
+          (this.publishCount = doc.data().PublishCount),
+          (this.trash = doc.data().Trash);
+        console.log("Trash", this.trash);
       });
   },
   methods: {
@@ -401,7 +451,25 @@ export default {
         })
         .catch((error) => console.error(error));
     },
+    StoryCount: function () {
+      var sfDocRef = db.collection("Admin").doc("gamescores");
 
+      db.runTransaction((transaction) => {
+        return transaction.get(sfDocRef).then((sfDoc) => {
+          var conts = sfDoc.data().StoryCount + 1;
+
+          transaction.update(sfDocRef, { StoryCount: conts });
+          return conts;
+        });
+      })
+        .then((newPopulation) => {
+          console.log("like count", newPopulation);
+        })
+        .catch((err) => {
+          // This will be an "population is too big" error.
+          console.error(err);
+        });
+    },
     UpoadStory() {
       if (this.type == null) {
         alert("Type of story is Null");
@@ -523,6 +591,21 @@ export default {
         );
       }
     },
+
+    fetchData() {
+      db.collection("Admin")
+        .doc("gamescores")
+        .onSnapshot((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            (this.storyCount = doc.data().StoryCount),
+              (this.predictCount = doc.data().PredictCount),
+              (this.draftCount = doc.data().DraftCount),
+              (this.publishCount = doc.data().PublishCount),
+              (this.trash = doc.data().Trash);
+          });
+          console.log("Trash", this.trash);
+        });
+    },
   },
   components: {},
 };
@@ -548,6 +631,9 @@ body {
 #label {
   font-size: 17px;
   margin: 10px;
+}
+ps {
+  height: 600px;
 }
 .btn {
   margin: 20px;
