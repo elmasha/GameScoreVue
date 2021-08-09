@@ -53,7 +53,11 @@ Vue.component('v-select', VSelect)
 Vue.component('b-navbar', BNavbar)
 
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
+
+Vue.use(VueAxios, axios)
 
 Vue.use(Vuetify)
 

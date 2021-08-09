@@ -1,39 +1,40 @@
 <template>
   <div id="addstroy">
     <h2>DashBoard</h2>
-    <div class="row text-center">
-      <div
-        class="container container-xl d-flex container col-md-12 justify-content-between"
-      >
-        <div md="12" xs="12">
-          <span
-            >Stories <br /><strong>{{ storyCount }}</strong>
-          </span>
-        </div>
-        <div md="2">
-          <span
-            >Predictions <br /><strong>{{ predictCount }}</strong></span
-          >
-        </div>
+    <div class="">
+      <div class="col-md-9 justify-content-between d-flex">
+        <div class="row">
+          <div class="col-md-6">
+            <span
+              >Stories <br /><strong>{{ storyCount }}</strong>
+            </span>
+          </div>
+          <div class="col-md-6">
+            <span
+              >Predictions <br /><strong>{{ predictCount }}</strong></span
+            >
+          </div>
 
-        <div md="2">
-          <span
-            >Published <br /><strong>{{ publishCount }}</strong></span
-          >
-        </div>
+          <div class="col-md-6">
+            <span
+              >Published <br /><strong>{{ publishCount }}</strong></span
+            >
+          </div>
 
-        <div md="2">
-          <span
-            >Trash <br /><strong>{{ trash }}</strong></span
-          >
-        </div>
+          <div class="col-md-6">
+            <span
+              >Trash <br /><strong>{{ trash }}</strong></span
+            >
+          </div>
 
-        <div md="2">
-          <span
-            >Draft <br /><strong>{{ draftCount }}</strong></span
-          >
+          <div class="col-md-6">
+            <span
+              >Draft <br /><strong>{{ draftCount }}</strong></span
+            >
+          </div>
         </div>
       </div>
+      <div></div>
     </div>
 
     <b-container class="row">
@@ -88,6 +89,7 @@
                 class="col-md-6"
                 v-model="category"
                 :options="[
+                  '',
                   'Football',
                   'Boxing',
                   'Rugby',
@@ -271,7 +273,7 @@
         </div></b-col
       >
       <b-col md="4">
-        <div id="col2" class="container col-md-12">
+        <div id="col2" class="col-md-12">
           <h5>Stories</h5>
           <perfect-scrollbar>
             <div v-for="story in stories" v-bind:key="story.id">
@@ -296,7 +298,7 @@
               </b-card></div
           ></perfect-scrollbar>
         </div>
-        <div id="col2" class="container col-md-12">
+        <div id="col2" class="col-md-12">
           <h5>Predictions</h5>
           <perfect-scrollbar>
             <div v-for="predict in predictions" v-bind:key="predict.id">
@@ -343,7 +345,7 @@ export default {
       stories: [],
       predictions: [],
       type: null,
-      category: "Football",
+      category: "",
       story_id: null,
       title: null,
       subtitle: null,
@@ -373,6 +375,9 @@ export default {
       imageUrl4: null,
       doc_id: null,
     };
+  },
+  updated() {
+    this.StoryCount;
   },
   mounted() {
     let start = new Date("2020-01-01");
@@ -583,6 +588,7 @@ export default {
                 })
                 .then((docRef) => {
                   console.log("Added id" + docRef);
+                  this.StoryCount;
                   this.$router.push("/");
                 })
                 .catch((error) => console.error(error));
@@ -626,7 +632,7 @@ body {
 }
 #story {
   height: 200px;
-  border-block-color: #b1b1b1;
+  border-color: #b1b1b1 solid 1px;
 }
 #label {
   font-size: 17px;

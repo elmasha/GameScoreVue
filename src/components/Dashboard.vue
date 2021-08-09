@@ -229,6 +229,9 @@ export default {
         "VolleyBall",
       ],
       select2: [],
+      info: null,
+      loading: true,
+      errored: false,
       apiUrl: "",
       isBusy: false,
       showloader: false,
@@ -262,7 +265,6 @@ export default {
       .get()
       .then((queryResult) => {
         queryResult.forEach((doc) => {
-          console.log(doc.data());
           const data = {
             id: doc.id,
             Title: doc.data().title,
@@ -281,7 +283,6 @@ export default {
       .get()
       .then((queryResult6) => {
         queryResult6.forEach((doc) => {
-          console.log("Predictions", doc.data());
           const data4 = {
             id2: doc.id,
             Title2: doc.data().title,
@@ -378,10 +379,8 @@ export default {
         .get()
         .then((queryResult) => {
           queryResult.forEach((doc) => {
-            console.log(doc.data());
             const data = {
               id: doc.id,
-
               Title: doc.data().title,
               Story: doc.data().story,
               Category: doc.data().category,
@@ -400,7 +399,6 @@ export default {
         .get()
         .then((queryResult1) => {
           queryResult1.forEach((doc) => {
-            console.log("Predictions", doc.data());
             const data1 = {
               id2: doc.id,
               Title2: doc.data().title,
@@ -422,7 +420,6 @@ export default {
         .get()
         .then((queryResult) => {
           queryResult.forEach((doc) => {
-            console.log(doc.data());
             const data = {
               id: doc.id,
               Title: doc.data().title,
