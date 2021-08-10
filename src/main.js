@@ -33,6 +33,13 @@ import VueSocialSharing from 'vue-social-sharing'
 Vue.use(VueSocialSharing)
 
 
+import VueMeta from 'vue-meta'
+
+Vue.use(VueMeta, {
+  // optional pluginOptions
+  refreshOnceOnNavigation: true
+})
+
 
 import InstagramEmbed from 'vue-instagram-embed';
 Vue.use(InstagramEmbed)
@@ -54,7 +61,11 @@ Vue.component('v-select', VSelect)
 Vue.component('b-navbar', BNavbar)
 
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
+
+Vue.use(VueAxios, axios)
 
 Vue.use(Vuetify)
 

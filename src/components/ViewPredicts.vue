@@ -194,8 +194,20 @@
             </div>
 
             <div>
+              <b-embed
+                id="embedSource"
+                type="iframe"
+                aspect="500by300"
+                :src="youTubeLink"
+              ></b-embed>
+            </div>
+            <div>
+              <TwitterFeed :src="twitterLink" height="70vh"></TwitterFeed>
+            </div>
+
+            <div>
               <form
-                @submit.prevent="Writecomment"
+                @submit.prevent="Writecomment()"
                 class="container-fluid container-xl d-flex container col-md-9"
               >
                 <div class="col-md-12">

@@ -91,14 +91,24 @@
                 <div id="shareOn" class="row">
                   <div class="col-md-9 container-fluid d-flex">
                     <h6>Share</h6>
-                    <div id="commentSect">
+
+                    <!-- <facebook id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" scale="3"></facebook>
+                    <twitter id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" :title="title" scale="3"></twitter>
+                    <linkedin id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" scale="3"></linkedin>
+                    <telegram id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" scale="3"></telegram>
+                    <whats-app id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" :title="title" scale="3"></whats-app>
+                    <pinterest id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" scale="3"></pinterest>
+                    <reddit id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" scale="3"  :title="title"></reddit>
+                    <email id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" :subject="title" scale="3"></email> -->
+
+                    <!-- <div id="commentSect">
                       <ShareNetwork
                         id="facebook"
                         class="btn-floating btn-normal"
                         network="facebook"
                         :media="imageUrl"
                         url="https://gamescores.co.ke/"
-                        :title="imageUrl"
+                        :title="title"
                         :description="story_id"
                         :quote="title"
                         ><i class="ri-facebook-circle-fill"></i>
@@ -112,7 +122,7 @@
                         network="whatsapp"
                         :media="imageUrl"
                         url="https://gamescores.co.ke/"
-                        :title="imageUrl"
+                        :title="title"
                         :description="story_id"
                         :quote="title"
                         ><i class="ri-whatsapp-line"></i>
@@ -141,7 +151,9 @@
                         url="https://gamescores.co.ke/:"
                         ><i class="ri-messenger-line"></i>
                       </ShareNetwork>
-                    </div>
+                    </div> -->
+
+
                   </div>
                 </div>
               </div>
@@ -198,34 +210,34 @@
               <b-embed
                 id="embedSource"
                 type="iframe"
-                aspect="500by250"
+                aspect="500by300"
                 :src="youTubeLink"
               ></b-embed>
             </div>
             <div>
-              <TwitterFeed :src="twitterLink"></TwitterFeed>
+              <TwitterFeed :src="twitterLink" height="70vh"></TwitterFeed>
             </div>
 
             <Tweet
-    tweet-id="1370027087818461184"
-    cards="visible"
-    conversation="all"
-    lang="en"
-    theme="light"
-    align="left"
-    :width="400"
-    :dnt="false"
-    @tweet-load-error="onTweetLoadError"
-    @tweet-load-success="onTweetLoadSuccess"
-  >
-    <template v-slot:loading>
-      <span>Loading...</span>
-    </template>
+            :tweet-id="twitterLink"
+            cards="visible"
+            conversation="all"
+            lang="en"
+            theme="light"
+            align="left"
+            :width="400"
+            :dnt="false"
+            @tweet-load-error="onTweetLoadError"
+            @tweet-load-success="onTweetLoadSuccess"
+          >
+          <template v-slot:loading>
+            <span>Loading...</span>
+          </template>
 
-    <template v-slot:error>
-      <span>Sorry, that tweet doesn’t exist!</span>
-    </template>
-  </Tweet>
+          <template v-slot:error>
+            <span>Sorry, that tweet doesn’t exist!</span>
+          </template>
+        </Tweet>
 
             <div>
               <form
@@ -236,7 +248,7 @@
                   <b-form-input
                     v-model="comments"
                     id="commentInput"
-                    placeholder="   Write a comment..."
+                    placeholder="Comment..."
                   >
                   </b-form-input>
                 </div>
@@ -264,10 +276,9 @@
                   align="left"
                   tag="article"
                   class="flexbox-item col-md-12"
-                  style="max-width: 500rem"
-                ><b-card-text>
-                <span>{{story.Title}}</span>
-                </b-card-text>
+                  style="max-width: 300rem"
+                  :header="story.Title"
+                >
                   <!-- list group -->
                 </b-card>
               </div>
@@ -284,7 +295,9 @@ import db from "./firebaseInit";
 import moment from "vue-moment";
 import InstagramEmbed from "vue-instagram-embed";
 
+
 export default {
+   
   name: "viewstory",
   data() {
     return {
@@ -308,7 +321,6 @@ export default {
     this.fetchData;
     this.FetchData;
     this.ShareBtn;
-
     let ckeditor = document.getElementById("embed").createElement("script");
     ckeditor.setAttribute("src", this.otherLinks);
     document.head.appendChild(ckeditor);

@@ -85,7 +85,8 @@
                             :img-src="story.image"
                             img-top
                             tag="article"
-                            style="max-height: 100rem"
+                            width="400px"
+                            height="70vh"
                             :footer="story.Category"
                             class="flexbox-item col-md-12"
                           >
@@ -228,6 +229,9 @@ export default {
         "VolleyBall",
       ],
       select2: [],
+      info: null,
+      loading: true,
+      errored: false,
       apiUrl: "",
       isBusy: false,
       showloader: false,
@@ -261,7 +265,6 @@ export default {
       .get()
       .then((queryResult) => {
         queryResult.forEach((doc) => {
-          console.log(doc.data());
           const data = {
             id: doc.id,
             Title: doc.data().title,
@@ -280,7 +283,6 @@ export default {
       .get()
       .then((queryResult6) => {
         queryResult6.forEach((doc) => {
-          console.log("Predictions", doc.data());
           const data4 = {
             id2: doc.id,
             Title2: doc.data().title,
@@ -377,10 +379,8 @@ export default {
         .get()
         .then((queryResult) => {
           queryResult.forEach((doc) => {
-            console.log(doc.data());
             const data = {
               id: doc.id,
-
               Title: doc.data().title,
               Story: doc.data().story,
               Category: doc.data().category,
@@ -399,7 +399,6 @@ export default {
         .get()
         .then((queryResult1) => {
           queryResult1.forEach((doc) => {
-            console.log("Predictions", doc.data());
             const data1 = {
               id2: doc.id,
               Title2: doc.data().title,
@@ -421,7 +420,6 @@ export default {
         .get()
         .then((queryResult) => {
           queryResult.forEach((doc) => {
-            console.log(doc.data());
             const data = {
               id: doc.id,
               Title: doc.data().title,
@@ -509,6 +507,19 @@ a {
   flex-direction: row;
   padding: 0px 0px 0px 0px;
 }
+#PredictCard{
+display: flex;
+  flex-wrap: wrap;
+  margin: 8px;
+  flex-direction: row;
+  padding: 0px 0px 0px 0px;
+}
+
+@media (max-height:70vh) {
+  #PredictCard ,#CardView{
+    height: 70vh;
+  }
+}
 #navbar {
   display: flex;
   width: 100%;
@@ -576,7 +587,7 @@ a {
   }
 }
 #newsSection {
-  margin-top: 60px;
+  margin-top: 10px;
 }
 #mynav {
   color: #f19124;
