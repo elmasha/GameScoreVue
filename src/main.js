@@ -13,6 +13,10 @@ Vue.use(Tweet)
 
 
 
+import Sharethis from 'vue-sharethis'
+
+Vue.use(Sharethis)
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-select/dist/vue-select.css';
@@ -26,7 +30,7 @@ Vue.use(VueAos);
 
 import PerfectScrollbar from 'vue2-perfect-scrollbar'
 import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
- 
+
 Vue.use(PerfectScrollbar)
 
 import VueSocialSharing from 'vue-social-sharing'
@@ -36,8 +40,8 @@ Vue.use(VueSocialSharing)
 import VueMeta from 'vue-meta'
 
 Vue.use(VueMeta, {
-  // optional pluginOptions
-  refreshOnceOnNavigation: true
+    // optional pluginOptions
+    refreshOnceOnNavigation: true
 })
 
 

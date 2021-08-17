@@ -29,6 +29,7 @@
     "vue-router": "^3.5.2",
     "vue-select": "^3.11.2",
     "vue-share-buttons": "^1.1.0",
+    "vue-sharethis": "0.0.1",
     "vue-social-sharing": "^3.0.8",
     "vue-socialmedia-share": "^1.0.1",
     "vue-tweet": "^1.0.3",
@@ -47,7 +48,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.8.2"
   },
   "eslintConfig": {
     "root": true,

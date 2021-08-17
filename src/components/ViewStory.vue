@@ -1,5 +1,7 @@
 <template>
+
   <div id="viewstory">
+  <div class="sharethis-sticky-share-buttons"></div>
     <div id="navlinks" class="container">
       <p></p>
       <ul class="nav">
@@ -7,7 +9,9 @@
           <a href="/"><img id="gamelogo" :src="logo" alt="" /></a>
         </li>
       </ul>
-
+      <header>
+      </header>
+ 
       <ul class="nav justify-content-end">
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
@@ -50,12 +54,14 @@
         </li>
       </ul>
     </div>
-
+ 
     <div class="col-md-12" align="center">
       <div class="container">
         <img id="header-image" :src="header2" style="width: 100%" />
       </div>
     </div>
+
+   
 
     <div class="col-md-12">
       <h3 id="story-view-title">{{ title }}</h3>
@@ -88,6 +94,8 @@
                 </div>
               </div>
               <div class="col-md-12">
+             
+
                 <div id="shareOn" class="row">
                   <div class="col-md-9 container-fluid d-flex">
                     <h6>Share</h6>
@@ -152,7 +160,9 @@
                         ><i class="ri-messenger-line"></i>
                       </ShareNetwork>
                     </div> -->
+                 
 
+                    
 
                   </div>
                 </div>
@@ -161,6 +171,9 @@
               <hr />
 
               <div class="col-md-12" id="story-view-story">
+                 <Sharethis
+                  share-this-embed-url="https://platform-api.sharethis.com/js/sharethis.js#property=611b765a030dfe001340394b&product=sticky-share-buttons"
+                />
                 <a :href="otherLinks"
                   ><h4>{{ subheading }}</h4></a
                 >
@@ -294,6 +307,7 @@
 import db from "./firebaseInit";
 import moment from "vue-moment";
 import InstagramEmbed from "vue-instagram-embed";
+import Sharethis from 'vue-sharethis';
 
 
 export default {
@@ -517,6 +531,7 @@ export default {
   },
   components: {
     InstagramEmbed,
+    Sharethis
   },
 };
 </script>

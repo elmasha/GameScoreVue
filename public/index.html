@@ -19,6 +19,12 @@
     <title>
         <%= htmlWebpackPlugin.options.title %>
     </title>
+
+    <meta property="og:title" content="Join the best company in the world!" />
+    <meta property="og:url" content="http://www.sharethis.com" />
+    <meta property="og:image" content="http://sharethis.com/images/logo.jpg" />
+    <meta property="og:description" content="ShareThis is its people. It's imperative that we hire smart,innovative people who can work intelligently as we continue to disrupt the very category we created. Come join us!" />
+    <meta property="og:site_name" content="ShareThis" />
 </head>
 
 <body>
@@ -29,10 +35,12 @@
 
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
 
-    <script data-cfasync="false" async src="https://cdn.shareaholic.net/assets/pub/shareaholic.js"></script>
+
     <script src="/dist/vue-social-sharing.js"></script>
     <script src="path/to/vue-awesome/dist/vue-awesome.js"></script>
     <script src="https://unpkg.com/vue-meta/dist/vue-meta.min.js"></script>
+
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=611b765a030dfe001340394b&product=sticky-share-buttons" async="async"></script>
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

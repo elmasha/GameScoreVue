@@ -59,6 +59,7 @@
             <img :src="header" align="center" style="width: 100%" />
           </div>
         </div>
+
         <b-container id="newsSection" class="bv-example-row">
           <b-row>
             <b-col md="12" cols="12">
@@ -80,19 +81,13 @@
                       >
                         <b-card-group>
                           <b-card
-                            id="CardView"
-                            :header="story.timestamp"
                             :img-src="story.image"
                             img-top
                             tag="article"
                             width="400px"
-                            height="70vh"
-                            :footer="story.Category"
-                            class="flexbox-item col-md-12"
+                            :header="story.Category"
+                            :title="story.Title"
                           >
-                            <b-card-text>
-                              <h5>{{ story.Title }}</h5>
-                            </b-card-text>
                             <div id="story-head" class="story-title text-center">
                               <div class="container-fluid container-xl d-flex">
                                 <div id="commentSect">
@@ -116,7 +111,9 @@
                 </perfect-scrollbar>
               </div>
             </b-col>
-
+            <Sharethis
+              share-this-embed-url="https://platform-api.sharethis.com/js/sharethis.js#property=611b765a030dfe001340394b&product=sticky-share-buttons"
+            />
             <!--Predictions-->
             <b-col md="12" cols="12">
               <h4>Predictions</h4>
@@ -501,25 +498,18 @@ a {
 }
 
 #CardView {
+  display: block;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+#PredictCard {
   display: flex;
   flex-wrap: wrap;
   margin: 8px;
   flex-direction: row;
   padding: 0px 0px 0px 0px;
 }
-#PredictCard{
-display: flex;
-  flex-wrap: wrap;
-  margin: 8px;
-  flex-direction: row;
-  padding: 0px 0px 0px 0px;
-}
 
-@media (max-height:70vh) {
-  #PredictCard ,#CardView{
-    height: 70vh;
-  }
-}
 #navbar {
   display: flex;
   width: 100%;
