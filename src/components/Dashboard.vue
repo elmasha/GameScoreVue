@@ -76,7 +76,7 @@
                       <router-link
                         v-bind:to="{
                           name: 'viewstory',
-                          params: { story_id: story.id },
+                          params: { Title: story.Title },
                         }"
                       >
                         <b-card-group>

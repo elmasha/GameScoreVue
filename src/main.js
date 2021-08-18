@@ -37,7 +37,9 @@ import VueSocialSharing from 'vue-social-sharing'
 Vue.use(VueSocialSharing)
 
 
+
 import VueMeta from 'vue-meta'
+
 
 Vue.use(VueMeta, {
     // optional pluginOptions

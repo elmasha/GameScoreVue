@@ -1,7 +1,6 @@
 <template>
-
   <div id="viewstory">
-  <div class="sharethis-sticky-share-buttons"></div>
+    <div class="sharethis-sticky-share-buttons"></div>
     <div id="navlinks" class="container">
       <p></p>
       <ul class="nav">
@@ -9,9 +8,8 @@
           <a href="/"><img id="gamelogo" :src="logo" alt="" /></a>
         </li>
       </ul>
-      <header>
-      </header>
- 
+      <header></header>
+
       <ul class="nav justify-content-end">
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
@@ -54,14 +52,12 @@
         </li>
       </ul>
     </div>
- 
+
     <div class="col-md-12" align="center">
       <div class="container">
         <img id="header-image" :src="header2" style="width: 100%" />
       </div>
     </div>
-
-   
 
     <div class="col-md-12">
       <h3 id="story-view-title">{{ title }}</h3>
@@ -81,7 +77,7 @@
           <b-col md="8">
             <div class="col-md-12">
               <div class="col-md-9 container-fluid d-flex">
-                <div id="commentSect" v-on: @click="LikeCount()">
+                <div id="commentSect" v-on: @click.prevent="LikeCount(story_id)">
                   <span>
                     <i id="showUS" class="ri-heart-3-fill"> {{ like }} </i></span
                   >
@@ -94,8 +90,6 @@
                 </div>
               </div>
               <div class="col-md-12">
-             
-
                 <div id="shareOn" class="row">
                   <div class="col-md-9 container-fluid d-flex">
                     <h6>Share</h6>
@@ -160,10 +154,10 @@
                         ><i class="ri-messenger-line"></i>
                       </ShareNetwork>
                     </div> -->
-                 
 
-                    
-
+                    <!-- ShareThis BEGIN -->
+                    <div class="sharethis-inline-share-buttons"></div>
+                    <!-- ShareThis END -->
                   </div>
                 </div>
               </div>
@@ -171,7 +165,7 @@
               <hr />
 
               <div class="col-md-12" id="story-view-story">
-                 <Sharethis
+                <Sharethis
                   share-this-embed-url="https://platform-api.sharethis.com/js/sharethis.js#property=611b765a030dfe001340394b&product=sticky-share-buttons"
                 />
                 <a :href="otherLinks"
@@ -232,25 +226,25 @@
             </div>
 
             <Tweet
-            :tweet-id="twitterLink"
-            cards="visible"
-            conversation="all"
-            lang="en"
-            theme="light"
-            align="left"
-            :width="400"
-            :dnt="false"
-            @tweet-load-error="onTweetLoadError"
-            @tweet-load-success="onTweetLoadSuccess"
-          >
-          <template v-slot:loading>
-            <span>Loading...</span>
-          </template>
+              :tweet-id="twitterLink"
+              cards="visible"
+              conversation="all"
+              lang="en"
+              theme="light"
+              align="left"
+              :width="400"
+              :dnt="false"
+              @tweet-load-error="onTweetLoadError"
+              @tweet-load-success="onTweetLoadSuccess"
+            >
+              <template v-slot:loading>
+                <span>Loading...</span>
+              </template>
 
-          <template v-slot:error>
-            <span>Sorry, that tweet doesn’t exist!</span>
-          </template>
-        </Tweet>
+              <template v-slot:error>
+                <span>Sorry, that tweet doesn’t exist!</span>
+              </template>
+            </Tweet>
 
             <div>
               <form
@@ -307,11 +301,9 @@
 import db from "./firebaseInit";
 import moment from "vue-moment";
 import InstagramEmbed from "vue-instagram-embed";
-import Sharethis from 'vue-sharethis';
-
+import Sharethis from "vue-sharethis";
 
 export default {
-   
   name: "viewstory",
   data() {
     return {
@@ -331,6 +323,38 @@ export default {
       time: null,
     };
   },
+  //insert the following code for vue-meta to work
+  metaInfo() {
+    return {
+      title: `${this.userData.name} - Epiloge`,
+      meta: [
+        {
+          name: "description",
+          content:
+            "Connect and follow " +
+            this.stories.title +
+            " on gamescores - " +
+            this.stories.tagline,
+        },
+        { property: "og:title", content: this.stories.title + " - gamescores" },
+        { property: "og:site_name", content: "gamescores" },
+        {
+          property: "og:description",
+          content:
+            "Connect and follow " +
+            this.stories.title +
+            " on gamescores - " +
+            this.userData.tagline,
+        },
+        { property: "og:type", content: "profile" },
+        { property: "og:url", content: "https://gamescore.co.ke/" + this.stories.title },
+        {
+          property: "og:image",
+          content: this.imageUrl + "/users/" + this.stories.image + "-main.jpg",
+        },
+      ],
+    };
+  },
   created() {
     this.fetchData;
     this.FetchData;
@@ -347,7 +371,7 @@ export default {
 
   beforeRouteEnter(to, from, next) {
     db.collection("Stories")
-      .where("doc_ID", "==", to.params.story_id)
+      .where("title", "==", to.params.Title)
       .onSnapshot((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           next((vm) => {
@@ -473,8 +497,8 @@ export default {
           console.log("Story", this.title);
         });
     },
-    LikeCount: function () {
-      var sfDocRef = db.collection("Stories").doc(this.$route.params.story_id);
+    LikeCount: function (val) {
+      var sfDocRef = db.collection("Stories").doc(val);
 
       db.runTransaction((transaction) => {
         return transaction.get(sfDocRef).then((sfDoc) => {
@@ -531,7 +555,7 @@ export default {
   },
   components: {
     InstagramEmbed,
-    Sharethis
+    Sharethis,
   },
 };
 </script>

@@ -42,15 +42,15 @@ const routes = [{
         name: 'viewpredicts',
         component: ViewPredicts
     },
-   
+
     {
-        path: '/:story_id',
+        path: '/:Title',
         name: 'viewstory',
         component: ViewStory
     }
-    
-  
-   
+
+
+
 ]
 
 const router = new VueRouter({
