@@ -11,6 +11,11 @@ import 'vuetify/dist/vuetify.min.css'
 import Tweet from 'vue-tweet'
 Vue.use(Tweet)
 
+window.Slug = require('slug');
+window.Slug.defaults.mode = 'rfc3986';
+
+
+
 
 
 import Sharethis from 'vue-sharethis'
@@ -65,6 +70,22 @@ Vue.use(IconsPlugin)
     ///Vue select
 Vue.component('v-select', VSelect)
 Vue.component('b-navbar', BNavbar)
+
+import '@toast-ui/editor/dist/toastui-editor.css';
+
+
+import { Editor } from '@toast-ui/vue-editor';
+
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+
+import { Viewer } from '@toast-ui/vue-editor';
+
+
+Vue.component('editor', Editor)
+Vue.component('viewer', Viewer)
+
+Vue.use(Viewer)
+Vue.use(Editor)
 
 
 import axios from 'axios'

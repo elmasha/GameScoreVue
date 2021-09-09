@@ -94,67 +94,6 @@
                   <div class="col-md-9 container-fluid d-flex">
                     <h6>Share</h6>
 
-                    <!-- <facebook id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" scale="3"></facebook>
-                    <twitter id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" :title="title" scale="3"></twitter>
-                    <linkedin id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" scale="3"></linkedin>
-                    <telegram id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" scale="3"></telegram>
-                    <whats-app id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" :title="title" scale="3"></whats-app>
-                    <pinterest id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" scale="3"></pinterest>
-                    <reddit id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" scale="3"  :title="title"></reddit>
-                    <email id="commentSect" :url=" `https://gamescore.co.ke:${story_id}`" :subject="title" scale="3"></email> -->
-
-                    <!-- <div id="commentSect">
-                      <ShareNetwork
-                        id="facebook"
-                        class="btn-floating btn-normal"
-                        network="facebook"
-                        :media="imageUrl"
-                        url="https://gamescores.co.ke/"
-                        :title="title"
-                        :description="story_id"
-                        :quote="title"
-                        ><i class="ri-facebook-circle-fill"></i>
-                      </ShareNetwork>
-                    </div>
-
-                    <div id="commentSect">
-                      <ShareNetwork
-                        id="whatsapp"
-                        class="btn-floating btn-normal"
-                        network="whatsapp"
-                        :media="imageUrl"
-                        url="https://gamescores.co.ke/"
-                        :title="title"
-                        :description="story_id"
-                        :quote="title"
-                        ><i class="ri-whatsapp-line"></i>
-                      </ShareNetwork>
-                    </div>
-
-                    <div id="commentSect">
-                      <ShareNetwork
-                        id="twitter"
-                        class="btn-floating btn-normal"
-                        network="twitter"
-                        :media="imageUrl"
-                        :title="title"
-                        url="https://gamescores.co.ke/"
-                        :quote="title"
-                        ><i class="ri-twitter-line"></i>
-                      </ShareNetwork>
-                    </div>
-
-                    <div id="commentSect">
-                      <ShareNetwork
-                        id="messenger"
-                        class="btn-floating btn-normal"
-                        network="messenger"
-                        :media="imageUrl"
-                        url="https://gamescores.co.ke/:"
-                        ><i class="ri-messenger-line"></i>
-                      </ShareNetwork>
-                    </div> -->
-
                     <!-- ShareThis BEGIN -->
                     <div class="sharethis-inline-share-buttons"></div>
                     <!-- ShareThis END -->
@@ -172,6 +111,10 @@
                   ><h4>{{ subheading }}</h4></a
                 >
                 <p>{{ story }}</p>
+
+                <div>
+                  <viewer :initialValue="story" :value="editorText" height="500px" />
+                </div>
 
                 <div class="story-view-image col-md-9" align="center">
                   <img id="imageViewStory1" class="fluid" :src="imageUrl2" alt="" />
@@ -302,6 +245,10 @@ import db from "./firebaseInit";
 import moment from "vue-moment";
 import InstagramEmbed from "vue-instagram-embed";
 import Sharethis from "vue-sharethis";
+
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+
+import { Viewer } from "@toast-ui/vue-editor";
 
 export default {
   name: "viewstory",
@@ -556,6 +503,7 @@ export default {
   components: {
     InstagramEmbed,
     Sharethis,
+    Viewer,
   },
 };
 </script>

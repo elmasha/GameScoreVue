@@ -13,7 +13,11 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data: function () {
+    return {};
+  },
+};
 </script>
 <style scoped>
 .slug-widget {

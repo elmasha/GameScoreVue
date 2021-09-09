@@ -42,8 +42,18 @@
       <!---Col No.1-->
       <b-col md="8">
         <h4 style="color: #000">Add stroy</h4>
+
         <div class="row">
           <form id="form-upload" @submit.prevent="UpoadStory" class="cols-12 md-12">
+            <editor
+              class="form-group"
+              height="900px"
+              :initialValue="editorText"
+              :value="editorText"
+              v-model="editorText"
+              v-on:event="editorText"
+              previewStyle="vertical"
+            />
             <br />
             <br />
             <div class="row form-group cols-9 md-9">
@@ -109,6 +119,11 @@
             <div class="row form-group cols-9 md-9">
               <label id="label" for="title">Enter story title</label>
               <input type="text" placeholder="Tile" v-model="title" id="title" />
+            </div>
+
+            <div>
+              <vue-suglify :name="title" :model="slug" />
+              {{ slug }}
             </div>
 
             <div class="row form-group">
@@ -333,10 +348,16 @@ import db from "./firebaseInit";
 import db2 from "./firebaseInit";
 import firebase from "firebase";
 
+import "@toast-ui/editor/dist/toastui-editor.css";
+
+import { Editor } from "@toast-ui/vue-editor";
+
 export default {
   name: "addstroy",
-  data() {
+  data: function () {
     return {
+      editorText: null,
+      viewerText: "# This is Viewer.\n Hello World.",
       storyCount: 0,
       predictCount: 0,
       trash: 0,
@@ -374,8 +395,10 @@ export default {
       imageUrl3: null,
       imageUrl4: null,
       doc_id: null,
+      slug: "",
     };
   },
+
   updated() {
     this.StoryCount;
   },
@@ -563,7 +586,7 @@ export default {
                 .set({
                   title: this.title,
                   subtitle: this.subtitle,
-                  story: this.story,
+                  story: this.editorText,
                   story1: this.story1,
                   story2: this.story2,
                   story3: this.story3,
@@ -613,7 +636,9 @@ export default {
         });
     },
   },
-  components: {},
+  components: {
+    Editor,
+  },
 };
 </script>
 
@@ -646,5 +671,14 @@ ps {
   background: #b1b1b1;
   color: aquamarine;
   font-weight: 500;
+}
+
+.slug-widget {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.wrapper {
+  margin-left: 8px;
 }
 </style>
